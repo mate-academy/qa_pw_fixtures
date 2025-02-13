@@ -6,8 +6,8 @@
 3. Run the installation commands `npm ci` & `npx playwright install`.
 
 ## Main task:
-1. Add all the edit article tests you have created in the previous home work. 
-2. Create file `fixturesArticles.ts` under the `tests/_fixtures` folder.
+1. Add all the edit article tests you have created in the previous homework.
+2. Create the file `fixturesArticles.ts` under the `tests/_fixtures` folder.
 3. Add test scope fixtures to the file:
 - `createArticlePage` - for initializing CreateArticlePage page.
 - `viewArticlePage` - for initializing ViewArticlePage page.
@@ -16,11 +16,10 @@
 - `articleWithOneTag` - for generating random article test data.
 - `articleWithTwoTags` - for generating random article test data.
 3. Merge fixtures from `fixturesArticles.ts` to the `fixtures.ts` file.
-4. Add logger to the input parameters of the `generateNewArticleData.js` and the debug log `New article geenrated: ${article}`. 
+4. Add a logger to the input parameters of the `generateNewArticleData.js` and the debug log `New article generated: ${article}`.
 - use as an example `generateNewUserData.js`.
-4. Update all the article tests to use fixtures. 
-5. Re-run all your tests and make sure they pass after the updates. 
-
+4. Update all the article tests to use fixtures.
+5. Re-run all your tests and make sure they pass after the updates.
 
 ## Task Reporting: 
 1. Add and commit all your updates. 
