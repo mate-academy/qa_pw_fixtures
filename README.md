@@ -9,9 +9,9 @@
 1. Add all the edit article tests you have created in the previous homework.
 2. Create the file `fixturesArticles.ts` under the `tests/_fixtures` folder.
 3. Add test scope fixtures to the file:
-- `createArticlePage` - for initializing CreateArticlePage page.
-- `viewArticlePage` - for initializing ViewArticlePage page.
-- `editArticlePage` - for initializing EditArticlePage page.
+- `createArticlePage` - for initializing the CreateArticlePage page.
+- `viewArticlePage` - for initializing the ViewArticlePage page.
+- `editArticlePage` - for initializing the EditArticlePage page.
 - `articleWithoutTags` - for generating random article test data.
 - `articleWithOneTag` - for generating random article test data.
 - `articleWithTwoTags` - for generating random article test data.
