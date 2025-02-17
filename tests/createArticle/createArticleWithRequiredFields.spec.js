@@ -9,10 +9,10 @@ test.describe('Create an article', () => {
   let viewArticlePage;
   let article;
 
-  test.beforeEach(async ({ page, user }) => {
+  test.beforeEach(async ({ page, user, logger }) => {
     createArticlePage = new CreateArticlePage(page);
     viewArticlePage = new ViewArticlePage(page);
-    article = generateNewArticleData();
+    article = generateNewArticleData(logger);
 
     await signUpUser(page, user);
   });
