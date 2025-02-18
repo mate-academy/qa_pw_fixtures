@@ -4,28 +4,26 @@ import { generateNewArticleData } from '../../src/common/testData/generateNewArt
 import { signUpUser } from '../../src/ui/actions/auth/signUpUser';
 import { ViewArticlePage } from '../../src/ui/pages/article/ViewArticlePage';
 
-test.describe('Create an article', () => {
-  let createArticlePage;
-  let viewArticlePage;
-  let article;
+let createArticlePage;
+let viewArticlePage;
+let article;
 
-  test.beforeEach(async ({ page, user, logger }) => {
-    createArticlePage = new CreateArticlePage(page);
-    viewArticlePage = new ViewArticlePage(page);
-    article = generateNewArticleData(logger);
+test.beforeEach(async ({ page, user, logger }) => {
+  createArticlePage = new CreateArticlePage(page);
+  viewArticlePage = new ViewArticlePage(page);
+  article = generateNewArticleData(logger);
 
-    await signUpUser(page, user);
-  });
+  await signUpUser(page, user);
+});
 
-  test('Creat an article with required fields', async ({ homePage }) => {
-    await homePage.clickNewArticleLink();
+test('Creat an article with required fields', async ({ homePage }) => {
+  await homePage.clickNewArticleLink();
 
-    await createArticlePage.fillTitleField(article.title);
-    await createArticlePage.fillDescriptionField(article.description);
-    await createArticlePage.fillTextField(article.text);
-    await createArticlePage.clickPublishArticleButton();
+  await createArticlePage.fillTitleField(article.title);
+  await createArticlePage.fillDescriptionField(article.description);
+  await createArticlePage.fillTextField(article.text);
+  await createArticlePage.clickPublishArticleButton();
 
-    await viewArticlePage.assertArticleTitle(article.title);
-    await viewArticlePage.assertArticleText(article.text);
-  });
+  await viewArticlePage.assertArticleTitle(article.title);
+  await viewArticlePage.assertArticleText(article.text);
 });
