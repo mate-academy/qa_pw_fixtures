@@ -20,6 +20,10 @@
 - use as an example `generateNewUserData.js`.
 4. Update all the article tests to use fixtures.
 5. Re-run all your tests and make sure they pass after the updates.
+6. Change log level from `error` to `debug` in the `logger` fixture. Run the command `npx playwright test` and observe the logs reported. 
+7. Change log level from `debug` to `info` in the `logger` fixture. Run the command `npx playwright test` and observe the logs reported. 
+8. Change log level from `debug` to `warn` in the `logger` fixture. Run the command `npx playwright test` and observe the logs reported. 
+9. Change log level from `warn` to `error` in the `logger` fixture. Run the command `npx playwright test` and observe the logs reported. 
 
 ## Task Reporting: 
 1. Add and commit all your updates. 

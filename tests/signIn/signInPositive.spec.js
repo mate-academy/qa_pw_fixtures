@@ -1,6 +1,6 @@
 import { test } from '../_fixtures/fixtures';
 
-test.describe('Sign up positive tests', () => {
+test.describe('Sign in positive tests', () => {
   let user;
 
   test.beforeEach(async ({}) => {
