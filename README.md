@@ -1,33 +1,39 @@
-# Practice task: Add fixtures for Conduit edit article tests
+# Add Fixtures for Conduit Edit Article Tests
 
-## Preparation:
+## Preparation
+
 1. Open the forked repo in VSCode.
-2. Create a new branch: git checkout -b task_solution
-3. Run the installation commands `npm ci` & `npx playwright install`.
+2. Create a new branch by running `git checkout -b task_solution`.
+3. Run the installation commands:
 
-## Main task:
+    - `npm ci`
+    - `npx playwright install`
+
+## Task
+
 1. Add all the edit article tests you have created in the previous homework.
-2. Create the file `fixturesArticles.ts` under the `tests/_fixtures` folder.
-3. Add test scope fixtures to the file:
-- `createArticlePage` - for initializing the CreateArticlePage page.
-- `viewArticlePage` - for initializing the ViewArticlePage page.
-- `editArticlePage` - for initializing the EditArticlePage page.
-- `articleWithoutTags` - for generating random article test data.
-- `articleWithOneTag` - for generating random article test data.
-- `articleWithTwoTags` - for generating random article test data.
-3. Merge fixtures from `fixturesArticles.ts` to the `fixtures.ts` file.
-4. Add a logger to the input parameters of the `generateNewArticleData.js` and the debug log `New article generated: ${article}`.
-- use as an example `generateNewUserData.js`.
-4. Update all the article tests to use fixtures.
-5. Re-run all your tests and make sure they pass after the updates.
-6. Change log level from `error` to `debug` in the `logger` fixture. Run the command `npx playwright test` and observe the logs reported. 
-7. Change log level from `debug` to `info` in the `logger` fixture. Run the command `npx playwright test` and observe the logs reported. 
-8. Change log level from `debug` to `warn` in the `logger` fixture. Run the command `npx playwright test` and observe the logs reported. 
-9. Change log level from `warn` to `error` in the `logger` fixture. Run the command `npx playwright test` and observe the logs reported. 
+2. Create the `fixturesArticles.ts` file in the `tests/_fixtures` folder.
+3. Add the following test scope fixtures to the file:
 
-## Task Reporting: 
-1. Add and commit all your updates. 
+    - `createArticlePage` to initialize the `CreateArticlePage` page
+    - `viewArticlePage` to initialize the `ViewArticlePage` page
+    - `editArticlePage` to initialize the `EditArticlePage` page
+    - `articleWithoutTags` to generate random article test data
+    - `articleWithOneTag` to generate random article test data
+    - `articleWithTwoTags` to generate random article test data
+
+4. Merge fixtures from the `fixturesArticles.ts` to the `fixtures.ts` file.
+5. Add a logger to the input parameters of the `generateNewArticleData.js`, outputting a message `New article generated: ${article}` to the debug log. Use the `generateNewUserData.js` file as an example.
+6. Update all the article tests to use fixtures.
+7. Re-run all your tests and make sure they pass after the updates.
+8. Change the log level from `error` to `debug` in the `logger` fixture. Run the `npx playwright test` command and observe the logs reported.
+9. Change the log level from `debug` to `info` in the `logger` fixture. Run the `npx playwright test` command and observe the logs reported.
+10. Change the log level from `debug` to `warn` in the `logger` fixture. Run the `npx playwright test` command and observe the logs reported.
+11. Change the log level from `warn` to `error` in the `logger` fixture. Run the `npx playwright test` command and observe the logs reported.
+
+## Task Reporting
+
+1. Add and commit all your updates.
 2. Push the code to the origin.
-3. Create PR for your changes. 
-4. Fix all the suggestions from the Code review until PR is approved.  
-
+3. Create a PR for your changes.
+4. Keep implementing suggestions from code review until your PR is approved.
