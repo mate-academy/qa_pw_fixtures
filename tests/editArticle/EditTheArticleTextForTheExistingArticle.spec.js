@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test} from '../_fixtures/fixtures';
 import { CreateArticlePage } from '../../src/ui/pages/article/CreateArticlePage';
 import { generateNewUserData } from '../../src/common/testData/generateNewUserData';
 import { signUpUser } from '../../src/ui/actions/auth/signUpUser';
@@ -8,32 +8,23 @@ import { ViewArticlePage } from '../../src/ui/pages/article/ViewArticlePage';
 import { HomePage } from '../../src/ui/pages/HomePage';
 import { faker } from '@faker-js/faker';
 
-let createArticlePage;
-let viewArticlePage;
-let homePage;
 const newText = faker.lorem.sentence();
-let article;
 
-test.beforeEach(async ({ page }) => {
-  createArticlePage = new CreateArticlePage(page);
-  viewArticlePage = new ViewArticlePage(page);
-  homePage = new HomePage(page);
-  const user = generateNewUserData();
-  article = generateNewArticleData();
+test.beforeEach(async ({ page, homePage, articleWithoutTags, user }) => {
   await signUpUser(page, user);
   await homePage.clickNewArticleLink();
-  await createNewArticle(page, article);
+  await createNewArticle(page, articleWithoutTags);
 });
 
 test.afterEach(async ({ page }) => {
   await page.close();
 });
 
-test('Edit the article text for the existing article', async () => {
+test('Edit the article text for the existing article', async ({ viewArticlePage, createArticlePage, articleWithoutTags}) => {
   await viewArticlePage.clickEditArticleButton();
   await createArticlePage.fillTextField(newText);
   await createArticlePage.clickUpdateArticleButton();
-  await viewArticlePage.assertArticleTitleToContainText(article.title);
+  await viewArticlePage.assertArticleTitleToContainText(articleWithoutTags.title);
   await viewArticlePage.reload();
   await viewArticlePage.assertArticleTextIsVisible(newText);
 });
