@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test } from '../_fixtures/fixtures';
 import { CreateArticlePage } from '../../src/ui/pages/article/CreateArticlePage';
 import { generateNewUserData } from '../../src/common/testData/generateNewUserData';
 import { signUpUser } from '../../src/ui/actions/auth/signUpUser';
@@ -7,35 +7,26 @@ import { generateNewArticleData } from '../../src/common/testData/generateNewArt
 import { ViewArticlePage } from '../../src/ui/pages/article/ViewArticlePage';
 import { HomePage } from '../../src/ui/pages/HomePage';
 
-let createArticlePage;
-let viewArticlePage;
-let homePage;
-let article;
 let tagRemoved;
 let tagLeft;
 
-test.beforeEach(async ({ page }) => {
-  createArticlePage = new CreateArticlePage(page);
-  viewArticlePage = new ViewArticlePage(page);
-  homePage = new HomePage(page);
-  const user = generateNewUserData();
-  article = generateNewArticleData(2);
-  tagRemoved = article.tags[0];
-  tagLeft = article.tags[1];
+test.beforeEach(async ({ page, articleWithTwoTags, user, homePage }) => {
+  tagRemoved = articleWithTwoTags.tags[0];
+  tagLeft = articleWithTwoTags.tags[1];
   await signUpUser(page, user);
   await homePage.clickNewArticleLink();
-  await createNewArticle(page, article);
+  await createNewArticle(page, articleWithTwoTags);
 });
 
 test.afterEach(async ({ page }) => {
   await page.close();
 });
 
-test('Remove the tag for the existing article with tags', async () => {
+test('Remove the tag for the existing article with tags', async ({viewArticlePage, createArticlePage, articleWithTwoTags}) => {
   await viewArticlePage.clickEditArticleButton();
   await createArticlePage.removeTagFromTagList(tagRemoved);
   await createArticlePage.clickUpdateArticleButton();
-  await viewArticlePage.assertArticleTitleToContainText(article.title);
+  await viewArticlePage.assertArticleTitleToContainText(articleWithTwoTags.title);
   await viewArticlePage.reload()
   await viewArticlePage.assertArticleTagsToContainText(tagLeft);
   await viewArticlePage.assertArticleTagsNotToContainText(tagRemoved);
