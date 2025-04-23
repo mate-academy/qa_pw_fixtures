@@ -9,10 +9,6 @@ test.beforeEach(async ({ page, user, articleWithoutTags, homePage }) => {
   await createNewArticle(page, articleWithoutTags);
 });
 
-test.afterEach(async ({ page }) => {
-  await page.close();
-});
-
 test('Remove the description for the existing article', async ({viewArticlePage, createArticlePage}) => {
   await viewArticlePage.clickEditArticleButton();
   await createArticlePage.fillDescriptionField('');
@@ -20,4 +16,8 @@ test('Remove the description for the existing article', async ({viewArticlePage,
   await createArticlePage.assertErrorMessageContainsText(
     DESCRIPTION_CANNOT_BE_EMPTY
   );
+});
+
+test.afterEach(async ({ page }) => {
+  await page.close();
 });

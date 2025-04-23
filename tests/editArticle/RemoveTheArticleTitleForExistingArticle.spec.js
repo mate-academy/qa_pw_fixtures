@@ -9,10 +9,6 @@ test.beforeEach(async ({ page, homePage, user, articleWithTwoTags }) => {
   await createNewArticle(page, articleWithTwoTags);
 });
 
-test.afterEach(async ({ page }) => {
-  await page.close();
-});
-
 test('Remove the tag for the existing article with tags', async ({
   viewArticlePage,
   createArticlePage
@@ -21,4 +17,8 @@ test('Remove the tag for the existing article with tags', async ({
   await createArticlePage.fillTitleField('');
   await createArticlePage.clickUpdateArticleButton();
   await createArticlePage.assertErrorMessageContainsText(TITLE_CANNOT_BE_EMPTY)
+});
+
+test.afterEach(async ({ page }) => {
+  await page.close();
 });

@@ -11,10 +11,6 @@ test.beforeEach(async ({ user, articleWithoutTags, page, homePage }) => {
   await createNewArticle(page, articleWithoutTags);
 });
 
-test.afterEach(async ({ page }) => {
-  await page.close();
-});
-
 test('Add the tag to the article without tags', async ({
   viewArticlePage,
   createArticlePage,
@@ -23,9 +19,13 @@ test('Add the tag to the article without tags', async ({
   await viewArticlePage.clickEditArticleButton();
   await createArticlePage.fillTagsField(newTag);
   await createArticlePage.clickUpdateArticleButton();
-  await viewArticlePage.assertArticleTitleToContainText(
+  await viewArticlePage.assertArticleTitleContainsText(
     articleWithoutTags.title
   );
   await viewArticlePage.reload();
   await viewArticlePage.assertArticleTagsToContainText(newTag);
+});
+
+test.afterEach(async ({ page }) => {
+  await page.close();
 });

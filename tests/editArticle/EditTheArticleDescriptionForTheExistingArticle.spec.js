@@ -11,10 +11,6 @@ test.beforeEach(async ({ page, user, articleWithoutTags, homePage }) => {
   await createNewArticle(page, articleWithoutTags);
 });
 
-test.afterEach(async ({ page }) => {
-  await page.close();
-});
-
 test('Edit the article description for the existing article', async ({ 
   viewArticlePage,
   createArticlePage,
@@ -24,8 +20,12 @@ test('Edit the article description for the existing article', async ({
   await viewArticlePage.clickEditArticleButton();
   await createArticlePage.fillDescriptionField(newDescription);
   await createArticlePage.clickUpdateArticleButton();
-  await viewArticlePage.assertArticleTitleToContainText(articleWithoutTags.title);
+  await viewArticlePage.assertArticleTitleContainsText(articleWithoutTags.title);
   await homePage.open();
   await homePage.clickGlobalFeedTab();
   await homePage.assertArticlePreviewToContainText(newDescription);
+});
+
+test.afterEach(async ({ page }) => {
+  await page.close();
 });

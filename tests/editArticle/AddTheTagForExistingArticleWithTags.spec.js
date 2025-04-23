@@ -11,19 +11,23 @@ test.beforeEach(async ({ homePage, user, articleWithTwoTags, page }) => {
   await createNewArticle(page, articleWithTwoTags);
 });
 
-test.afterEach(async ({ page }) => {
-  await page.close();
-});
-
-test('Add the tag to the article with tags', async ({createArticlePage, viewArticlePage, articleWithTwoTags}) => {
+test('Add the tag to the article with tags', async ({
+  createArticlePage,
+  viewArticlePage,
+  articleWithTwoTags
+}) => {
   await viewArticlePage.clickEditArticleButton();
   await createArticlePage.fillTagsField(newTag);
   await createArticlePage.clickUpdateArticleButton();
-  await viewArticlePage.assertArticleTitleToContainText(articleWithTwoTags.title);
+  await viewArticlePage.assertArticleTitleContainsText(articleWithTwoTags.title);
   await viewArticlePage.reload();
   await viewArticlePage.assertArticleTagsToContainText(newTag);
 
   for (const tag of articleWithTwoTags.tags) {
     await viewArticlePage.assertArticleTagsToContainText(tag);
   }
+});
+
+test.afterEach(async ({ page }) => {
+  await page.close();
 });

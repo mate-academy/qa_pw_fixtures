@@ -26,7 +26,7 @@ test('Remove the tag for the existing article with tags', async ({viewArticlePag
   await viewArticlePage.clickEditArticleButton();
   await createArticlePage.removeTagFromTagList(tagRemoved);
   await createArticlePage.clickUpdateArticleButton();
-  await viewArticlePage.assertArticleTitleToContainText(articleWithTwoTags.title);
+  await viewArticlePage.assertArticleTitleContainsText(articleWithTwoTags.title);
   await viewArticlePage.reload()
   await viewArticlePage.assertArticleTagsToContainText(tagLeft);
   await viewArticlePage.assertArticleTagsNotToContainText(tagRemoved);

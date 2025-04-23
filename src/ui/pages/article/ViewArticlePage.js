@@ -28,7 +28,7 @@ export class ViewArticlePage {
     });
   }
 
-  async assertArticleTitleToContainText(title) {
+  async assertArticleTitleContainsText(title) {
     await test.step(`Assert the article has title - ${title}`, async () => {
       await expect(this.articleTitleHeader).toContainText(title);
     });

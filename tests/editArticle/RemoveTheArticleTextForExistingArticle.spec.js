@@ -9,10 +9,6 @@ test.beforeEach(async ({ page, homePage, user, articleWithoutTags }) => {
   await createNewArticle(page, articleWithoutTags);
 });
 
-test.afterEach(async ({ page }) => {
-  await page.close();
-});
-
 test('Remove the text for the existing article', async ({viewArticlePage, createArticlePage}) => {
   await viewArticlePage.clickEditArticleButton();
   await createArticlePage.fillTextField('');
@@ -20,4 +16,8 @@ test('Remove the text for the existing article', async ({viewArticlePage, create
   await createArticlePage.assertErrorMessageContainsText(
     TEXT_CANNOT_BE_EMPTY
   );
+});
+
+test.afterEach(async ({ page }) => {
+  await page.close();
 });

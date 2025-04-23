@@ -16,15 +16,15 @@ test.beforeEach(async ({ page, homePage, articleWithoutTags, user }) => {
   await createNewArticle(page, articleWithoutTags);
 });
 
-test.afterEach(async ({ page }) => {
-  await page.close();
-});
-
 test('Edit the article text for the existing article', async ({ viewArticlePage, createArticlePage, articleWithoutTags}) => {
   await viewArticlePage.clickEditArticleButton();
   await createArticlePage.fillTextField(newText);
   await createArticlePage.clickUpdateArticleButton();
-  await viewArticlePage.assertArticleTitleToContainText(articleWithoutTags.title);
+  await viewArticlePage.assertArticleTitleContainsText(articleWithoutTags.title);
   await viewArticlePage.reload();
   await viewArticlePage.assertArticleTextIsVisible(newText);
+});
+
+test.afterEach(async ({ page }) => {
+  await page.close();
 });
