@@ -3,13 +3,18 @@ import { expect, test } from '@playwright/test';
 export class CreateArticlePage {
   constructor(page) {
     this.page = page;
-    this.titleField = page.getByPlaceholder('Article Title');
+    this.titleField = page.locator('input[placeholder="Article Title"]');
     this.descriptionField = page.getByPlaceholder(`What's this article about?`);
     this.textField = page.getByPlaceholder('Write your article (in markdown)');
     this.publishArticleButton = page.getByRole('button', {
       name: 'Publish Article',
     });
     this.errorMessage = page.getByRole('list').nth(1);
+    this.tagField = page.getByPlaceholder('Enter tags');
+    this.updateArticleButton = page.getByRole('button', {
+      name: 'Update Article',
+    });
+    this.deleteTagElement = page.locator('.ion-close-round');
   }
 
   async fillTitleField(title) {
@@ -39,6 +44,25 @@ export class CreateArticlePage {
   async assertErrorMessageContainsText(messageText) {
     await test.step(`Assert the '${messageText}' error is shown`, async () => {
       await expect(this.errorMessage).toContainText(messageText);
+    });
+  }
+
+  async fillTagField(text) {
+    await test.step('Fill tag field', async () => {
+      await this.tagField.fill(text);
+      await this.page.keyboard.press('Enter');
+    });
+  }
+
+  async clickOnUpdateArticleButton() {
+    await test.step('Click on Update article button', async () => {
+      await this.updateArticleButton.click();
+    });
+  }
+
+  async clickOnDeleteTagButton() {
+    await test.step('Click on Delete Tag button', async () => {
+      await this.deleteTagElement.click();
     });
   }
 }
