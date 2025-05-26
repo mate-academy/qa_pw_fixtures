@@ -16,9 +16,10 @@ export const test = base.extend<
 
     await use(user);
   },
+
   logger: [
     async ({}, use) => {
-      const logger = new Logger('error');
+      const logger = new Logger('warn');
 
       await use(logger);
     },
