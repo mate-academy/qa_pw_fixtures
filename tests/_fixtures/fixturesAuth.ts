@@ -3,6 +3,7 @@ import { SignUpPage } from '../../src/ui/pages/auth/SignUpPage';
 import { SignInPage } from '../../src/ui/pages/auth/SignInPage';
 import { HomePage } from '../../src/ui/pages/HomePage';
 
+// @ts-ignore
 export const test = base.extend<{
   signUpPage;
   signInPage;
