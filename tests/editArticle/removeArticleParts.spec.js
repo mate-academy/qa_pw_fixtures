@@ -1,7 +1,7 @@
 import { test } from '../../tests/_fixtures/fixtures';
-import { signUpUser } from '../../src/ui/actions/auth/signUpUser'
-import { createNewArticle } from '../../src/ui/actions/article/createNewArticle'
-import { articleFieldName } from '../../src/common/enums/articleFields'
+import { signUpUser } from '../../src/ui/actions/auth/signUpUser';
+import { createNewArticle } from '../../src/ui/actions/article/createNewArticle';
+import { articleFieldName } from '../../src/common/enums/articleFields';
 import {
   TITLE_CANNOT_EMPTY,
   BODY_CANNOT_EMPTY,

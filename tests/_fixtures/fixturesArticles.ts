@@ -1,9 +1,9 @@
 import { test as base } from '@playwright/test';
-import  { CreateArticlePage } from '../../src/ui/pages/article/CreateArticlePage'
-import  { EditArticlePage } from '../../src/ui/pages/article/EditArticlePage'
-import  { ViewArticlePage } from '../../src/ui/pages/article/ViewArticlePage'
-import { generateNewArticleData } from '../../src/common/testData/generateNewArticleData'
-import { Logger } from '../../src/common/logger/Logger'
+import  { CreateArticlePage } from '../../src/ui/pages/article/CreateArticlePage';
+import  { EditArticlePage } from '../../src/ui/pages/article/EditArticlePage';
+import  { ViewArticlePage } from '../../src/ui/pages/article/ViewArticlePage';
+import { generateNewArticleData } from '../../src/common/testData/generateNewArticleData';
+import { Logger } from '../../src/common/logger/Logger';
 
 export const test = base.extend<{
   createArticlePage;
@@ -42,7 +42,7 @@ export const test = base.extend<{
   articleWithTwoTags: async ({}, use) => {
     const debugLogger = new Logger('debug');
     const artWithTwoTags = generateNewArticleData(
-      debugLogger, 1
+      debugLogger, 2
     );
     await use(artWithTwoTags);
   },

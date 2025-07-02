@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { test } from '../../tests/_fixtures/fixtures';
-import { signUpUser } from '../../src/ui/actions/auth/signUpUser'
-import { createNewArticle } from '../../src/ui/actions/article/createNewArticle'
+import { signUpUser } from '../../src/ui/actions/auth/signUpUser';
+import { createNewArticle } from '../../src/ui/actions/article/createNewArticle';
 
 
 test.describe('Add tag for existing article', () => {
@@ -34,7 +34,7 @@ test.describe('Add tag for existing article', () => {
     editArticlePage,
     viewArticlePage
   }) => {
-    
+
     await createNewArticle(page, articleWithOneTag, true);
     await viewArticlePage.clickEditArticle();
     await editArticlePage.addNewTag(newArtTag);
