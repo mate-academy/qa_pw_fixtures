@@ -1,5 +1,12 @@
 import { faker } from '@faker-js/faker';
 
+/**
+ * Generates new article data with optional tags
+ * @param {import('../../logger').Logger} logger 
+ * @param {number} tagNumber 
+ * @returns {{ title: string, description: string,
+ *  text: string, tags: string[] }}
+ */
 export function generateNewArticleData(logger, tagNumber = 0) {
   const tags = Array.from({ length: tagNumber }, () => faker.lorem.word());
 
@@ -12,8 +19,8 @@ export function generateNewArticleData(logger, tagNumber = 0) {
 
   logger.debug(`Generated new article: ${JSON.stringify(article)}`);
 
-  if (tags.lenght === 0) {
-    logger.warning(`Article does not have tag: ${JSON.stringify(article)}`);
+  if (tags.length === 0) {
+    logger.warn(`Article does not have tag: ${JSON.stringify(article)}`);
   }
 
   return article;
