@@ -36,7 +36,7 @@ export class CreateArticlePage {
     });
   }
 
-  async fillTagField(tags, clearTags) {
+  async clearTagField(clearTags) {
     if (clearTags === 0) {
       await test.step('Remove all tags', async () => {
         while ((await this.tagItem.count()) > 0) {
@@ -50,6 +50,10 @@ export class CreateArticlePage {
         await this.tagItem.first().click();
       }
     }
+  }
+
+  async fillTagField(tags, clearTags) {
+    await this.clearTagField(clearTags);
 
     if (tags && tags.length) {
       await test.step(`Fill the 'Tag' field`, async () => {

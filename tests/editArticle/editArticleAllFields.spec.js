@@ -18,7 +18,6 @@ test('Update article required & optional fields', async ({
   profilePage,
   article,
   user,
-  logger,
 }) => {
   /*
     Edit the article title for the existing article
@@ -28,7 +27,7 @@ test('Update article required & optional fields', async ({
   */
 
   newArticle = await article(2);
-  await updateArticle(page, newArticle, logger);
+  await updateArticle(page, newArticle);
 
   await profilePage.open(user.username);
   await profilePage.assertArticleTitleContainsText(newArticle.title);

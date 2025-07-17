@@ -6,7 +6,7 @@ import { updateArticle } from '../../src/ui/actions/article/updateArticle';
 let newArticle;
 
 test.beforeEach(async ({ page, user, article, homePage }) => {
-  newArticle = article(1);
+  newArticle = await article(1);
 
   await signUpUser(page, user);
   await homePage.clickNewArticleLink();
