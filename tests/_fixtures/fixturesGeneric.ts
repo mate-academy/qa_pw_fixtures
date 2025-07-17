@@ -1,10 +1,13 @@
 import { test as base } from '@playwright/test';
 import { Logger } from '../../src/common/logger/Logger';
 import { generateNewUserData } from '../../src/common/testData/generateNewUserData';
+import { generateNewArticleData } from '../../src/common/testData/generateNewArticleData';
+
 
 export const test = base.extend<
   {
     user;
+    article
     infoTestLog;
   },
   {
@@ -16,9 +19,15 @@ export const test = base.extend<
 
     await use(user);
   },
+  article: async ({ logger }, use) => {
+  const articleFunction = (tagNumber = 0, emptyField = null) =>
+    generateNewArticleData(logger, tagNumber, emptyField);
+
+  await use(articleFunction);
+  },
   logger: [
     async ({}, use) => {
-      const logger = new Logger('error');
+      const logger = new Logger('info');
 
       await use(logger);
     },
