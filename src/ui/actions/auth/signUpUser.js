@@ -13,3 +13,4 @@ export async function signUpUser(page, user) {
     await homePage.assertYourFeedTabIsVisible();
   });
 }
+
