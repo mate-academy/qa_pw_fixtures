@@ -1,19 +1,19 @@
 import { test } from '../_fixtures/fixtures';
-import { CreateArticlePage } from '../../src/ui/pages/article/CreateArticlePage';
 import { signUpUser } from '../../src/ui/actions/auth/signUpUser';
-import { TITLE_CANNOT_BE_EMPTY } from '../../src/ui/constants/articleErrorMessages';
-
-let createArticlePage;
+import { errors } from '../../src/ui/constants/articleErrorMessages';
 
 test.beforeEach(async ({ page, user }) => {
-  createArticlePage = new CreateArticlePage(page);
-
   await signUpUser(page, user);
 });
 
-test('Creat an article without required fields', async ({ homePage }) => {
+test('Creat an article without required fields', async ({
+  homePage,
+  createArticlePage,
+}) => {
   await homePage.clickNewArticleLink();
 
   await createArticlePage.clickPublishArticleButton();
-  await createArticlePage.assertErrorMessageContainsText(TITLE_CANNOT_BE_EMPTY);
+  await createArticlePage.assertErrorMessageContainsText(
+    errors.TITLE_CANNOT_BE_EMPTY,
+  );
 });
