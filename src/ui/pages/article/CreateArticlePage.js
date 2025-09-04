@@ -5,11 +5,12 @@ export class CreateArticlePage {
     this.page = page;
     this.titleField = page.getByPlaceholder('Article Title');
     this.descriptionField = page.getByPlaceholder(`What's this article about?`);
-    this.textField = page.getByPlaceholder('Write your article (in markdown)');
+    this.bodyField = page.getByPlaceholder('Write your article (in markdown)');
     this.publishArticleButton = page.getByRole('button', {
       name: 'Publish Article',
     });
     this.errorMessage = page.getByRole('list').nth(1);
+    this.articleTag = page.getByPlaceholder('Enter tags');
   }
 
   async fillTitleField(title) {
@@ -24,9 +25,9 @@ export class CreateArticlePage {
     });
   }
 
-  async fillTextField(text) {
+  async fillBodyField(body) {
     await test.step(`Fill the 'Text' field`, async () => {
-      await this.textField.fill(text);
+      await this.bodyField.fill(body);
     });
   }
 
@@ -39,6 +40,24 @@ export class CreateArticlePage {
   async assertErrorMessageContainsText(messageText) {
     await test.step(`Assert the '${messageText}' error is shown`, async () => {
       await expect(this.errorMessage).toContainText(messageText);
+    });
+  }
+  async addArticleTag(tag) {
+    await test.step(`Add an article tag: ${tag}`, async () => {
+      await this.articleTag.fill(tag);
+      await this.page.keyboard.press('Enter');
+    });
+  }
+
+  async fillArticleFields(article) {
+    await test.step('Filling the article fields', async () => {
+      await this.fillTitleField(article.title);
+      await this.fillDescriptionField(article.description);
+      await this.fillBodyField(article.body);
+      for (const tag of article.tags) {
+        await this.addArticleTag(tag);
+      }
+      await this.clickPublishArticleButton();
     });
   }
 }
