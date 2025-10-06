@@ -1,14 +1,13 @@
 import { faker } from '@faker-js/faker';
 
-export function generateNewArticleData(logger, tagNumber = 0) {
-  const tags = Array.from({ length: tagNumber }, () => faker.lorem.word());
-
+export function generateNewArticleData(logger) {
   const article = {
-    title: faker.lorem.words(),
-    description: faker.lorem.sentence(4),
-    text: faker.lorem.sentences(2),
-    tags,
+    title: faker.lorem.words(3),
+    description: faker.lorem.sentence(),
+    body: faker.lorem.paragraphs(2),
+    tagList: [faker.word.noun(), faker.word.noun()],
   };
 
+  logger.debug(`New article generated: ${JSON.stringify(article)}`);
   return article;
 }
