@@ -4,6 +4,10 @@ import { expect, test } from '@playwright/test';
  * @typedef {import('@playwright/test').Page} Page
  * @typedef {import('@playwright/test').Locator} Locator
  */
+
+/**
+ * Page Object for the View Article page.
+ */
 export class ViewArticlePage {
   /**
    * @param {Page} page
@@ -17,20 +21,14 @@ export class ViewArticlePage {
   }
 
   async assertArticleTitleIsVisible(title) {
-    await test.step(
-      `Assert the article has correct title`,
-      async () => {
-        await expect(this.articleTitleHeader).toContainText(title);
-      }
-    );
+    await test.step('Assert the article has correct title', async () => {
+      await expect(this.articleTitleHeader).toContainText(title);
+    });
   }
 
   async assertArticleTextIsVisible(text) {
-    await test.step(
-      `Assert the article has correct text`,
-      async () => {
-        await expect(this.page.getByText(text)).toBeVisible();
-      }
-    );
+    await test.step('Assert the article has correct text', async () => {
+      await expect(this.page.getByText(text)).toBeVisible();
+    });
   }
 }

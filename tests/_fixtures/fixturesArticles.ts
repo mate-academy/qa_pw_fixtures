@@ -1,5 +1,4 @@
-// tests/_fixtures/fixturesArticles.ts
-import { test as base, expect } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 
 export class CreateArticlePage {
@@ -81,7 +80,8 @@ export class EditArticlePage {
   }
 }
 
-export const test = base.extend({
+// ✅ Fixtures using Playwright’s test directly
+export const testExtended = test.extend({
   createArticlePage: async ({ page }, use) => {
     await use(new CreateArticlePage(page));
   },
