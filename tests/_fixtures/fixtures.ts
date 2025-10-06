@@ -1,9 +1,11 @@
-import { mergeTests } from '@playwright/test';
+import { mergeTests, expect as playwrightExpect } from '@playwright/test';
 import { test as authTest } from './fixturesAuth';
 import { test as genericTest } from './fixturesGeneric';
 import { testExtended as articlesFixtures } from './fixturesArticles';
-import { test as loggerTest } from './fixturesLogger'; // ✅ include logger fixture
+import { test as loggerTest } from './logger';
 
-// ✅ Merge all fixture groups, including logger
+// Merge all fixture groups
 export const test = mergeTests(authTest, genericTest, articlesFixtures, loggerTest);
-export const expect = articlesFixtures.expect;
+
+// Correct expect export
+export const expect = playwrightExpect;

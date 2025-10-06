@@ -6,17 +6,14 @@ import { expect, test } from '@playwright/test';
  */
 
 /**
- * Page Object for the View Article page.
+ * Page Object for viewing an article.
  */
 export class ViewArticlePage {
   /**
    * @param {Page} page
    */
   constructor(page) {
-    /** @type {Page} */
     this.page = page;
-
-    /** @type {Locator} */
     this.articleTitleHeader = page.getByRole('heading');
   }
 
