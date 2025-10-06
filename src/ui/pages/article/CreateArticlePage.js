@@ -1,14 +1,18 @@
-import { expect, test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
+/**
+ * Page Object for creating an article.
+ */
 export class CreateArticlePage {
+  /**
+   * @param {import('@playwright/test').Page} page
+   */
   constructor(page) {
     this.page = page;
     this.titleField = page.getByPlaceholder('Article Title');
     this.descriptionField = page.getByPlaceholder(`What's this article about?`);
     this.textField = page.getByPlaceholder('Write your article (in markdown)');
-    this.publishArticleButton = page.getByRole('button', {
-      name: 'Publish Article',
-    });
+    this.publishArticleButton = page.getByRole('button', { name: 'Publish Article' });
     this.errorMessage = page.getByRole('list').nth(1);
   }
 

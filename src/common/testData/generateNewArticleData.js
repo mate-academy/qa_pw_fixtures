@@ -1,14 +1,16 @@
-import { faker } from '@faker-js/faker';
-
-export function generateNewArticleData(logger, tagNumber = 0) {
-  const tags = Array.from({ length: tagNumber }, () => faker.lorem.word());
-
+/**
+ * Generates new article test data and logs it.
+ * @param {import('pino').Logger} logger
+ * @returns {{ title: string, description: string, body: string, tags: string[] }}
+ */
+export function generateNewArticleData(logger) {
   const article = {
-    title: faker.lorem.words(),
-    description: faker.lorem.sentence(4),
-    text: faker.lorem.sentences(2),
-    tags,
+    title: faker.lorem.words(3),
+    description: faker.lorem.sentence(),
+    body: faker.lorem.paragraphs(2),
+    tags: [faker.word.noun(), faker.word.noun()],
   };
 
+  logger.debug(`New article generated: ${article}`);
   return article;
 }
