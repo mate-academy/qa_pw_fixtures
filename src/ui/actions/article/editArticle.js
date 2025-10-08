@@ -159,8 +159,10 @@ export async function removeTagInArticle(page, article) {
         await createArticlePage.deleteTagBuble();
         await editArticlePage.clickUpdateArticleButton();
 
-        for (const tag of article.tags) {
-            await viewArticlePage.assertTagBubleIsNotVisible(tag);
+        if (Array.isArray(article.tags) && article.tags.length > 0) {
+            for (const tag of article.tags) {
+                await viewArticlePage.assertTagBubleIsNotVisible(tag);
+            }
         }
     });
 }
