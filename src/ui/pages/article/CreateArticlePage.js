@@ -73,7 +73,9 @@ export class CreateArticlePage {
 
   async deleteTagBuble() {
     await test.step(`Delete the 'Tag' buble`, async () => {
-      await this.tagBubleDeleteIcon.nth(0).click();
+      if (expect(this.tagBubleDeleteIcon.nth(0)).toBeVisible()) {
+        await this.tagBubleDeleteIcon.nth(0).click();
+      }
     });
   }
 }

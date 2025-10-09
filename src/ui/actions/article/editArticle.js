@@ -2,7 +2,6 @@ import { test } from '@playwright/test';
 import { CreateArticlePage } from '../../pages/article/CreateArticlePage';
 import { EditArticlePage } from '../../pages/article/EditArticlePage';
 import { ViewArticlePage } from '../../pages/article/ViewArticlePage';
-import { TITLE_CANNOT_BE_EMPTY, DESCRIPTION_CANNOT_BE_EMPTY, TEXT_CANNOT_BE_EMPTY } from '../../constants/articleErrorMessages';
 
 export async function editArticleTitle(page, article) {
     const createArticlePage = new CreateArticlePage(page);
