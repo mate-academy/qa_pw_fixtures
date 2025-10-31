@@ -1,14 +1,15 @@
 import { test as base } from '@playwright/test';
 import { Logger } from '../../src/common/logger/Logger';
 import { generateNewUserData } from '../../src/common/testData/generateNewUserData';
+import { generateNewArticleData } from '../../src/common/testData/generateNewArticleData';
 
 export const test = base.extend<
   {
-    user;
-    infoTestLog;
+    user: {},
+    infoTestLog: string,
   },
   {
-    logger;
+    logger: Logger;
   }
 >({
   user: async ({ logger }, use) => {
