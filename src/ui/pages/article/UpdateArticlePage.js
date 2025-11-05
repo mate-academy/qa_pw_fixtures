@@ -10,7 +10,7 @@ export class UpdateArticlePage {
     this.updateArticleButton = page.getByRole('button', {
       name: 'Update Article',
     });
-    this.errorMessage = page.getByRole('list').nth(1);
+    this.errorMessage = page.locator('.error-messages');
   }
 
   async fillTitleField(title) {
@@ -32,17 +32,21 @@ export class UpdateArticlePage {
   }
 
   async fillInTags(tags) {
-    await test.step(`Fill in tags`, async () => {
-      for (let tag of tags) {
-        await this.tagsField.fill(tag);
-        await this.page.keyboard.press('Enter');
-      }
-    });
+    if (tags && tags.length > 0) {
+      await test.step(`Fill in tags`, async () => {
+        for (let tag of tags) {
+          await this.tagsField.fill(tag);
+          await this.page.keyboard.press('Enter');
+        }
+      });
+    }
+    
   }
 
   async deleteTags(tag) {
     await test.step(`Delete tags`, async () => {
-      this.page.locator('span').filter({ hasText: tag }).locator('i').click();
+      this.page.locator('.tag-default')
+        .filter({ hasText: tag }).locator('.ion-close-round').click();
     });
   }
 

@@ -5,8 +5,7 @@ export class ViewArticlePage {
     this.page = page;
     this.articleTitleHeader = page.getByRole('heading');
     this.editArticleButton = page
-      .getByRole('link', { name: ' Edit Article' })
-      .first();
+      .locator('a.btn.btn-outline-secondary.btn-sm').first();
   }
 
   async clickEditArticleButton() {
