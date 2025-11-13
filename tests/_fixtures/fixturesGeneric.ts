@@ -2,13 +2,19 @@ import { test as base } from '@playwright/test';
 import { Logger } from '../../src/common/logger/Logger';
 import { generateNewUserData } from '../../src/common/testData/generateNewUserData';
 
+type UserData = {
+  username: string;
+  email: string;
+  password: string;
+};
+
 export const test = base.extend<
   {
-    user;
-    infoTestLog;
+    user: UserData;
+    infoTestLog: string;
   },
   {
-    logger;
+    logger: Logger;
   }
 >({
   user: async ({ logger }, use) => {
@@ -17,7 +23,7 @@ export const test = base.extend<
     await use(user);
   },
   logger: [
-    async ({}, use) => {
+    async ({ }, use) => {
       const logger = new Logger('error');
 
       await use(logger);
