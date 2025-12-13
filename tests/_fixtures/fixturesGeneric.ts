@@ -4,29 +4,26 @@ import { generateNewUserData } from '../../src/common/testData/generateNewUserDa
 
 export const test = base.extend<
   {
-    user: ReturnType<typeof generateNewUserData>; // или конкретный тип пользователя
+    user: ReturnType<typeof generateNewUserData>;
     infoTestLog: string;
   },
   {
     logger: Logger;
   }
 >({
-  // Фикстура логгера
   logger: [
     async ({}, use) => {
-      const logger = new Logger('debug'); // debug, info, warn, error
+      const logger = new Logger('error');
       await use(logger);
     },
     { scope: 'worker' },
   ],
 
-  // Генерация нового пользователя с логгером
   user: async ({ logger }, use) => {
     const user = generateNewUserData(logger);
     await use(user);
   },
 
-  // Авто-логирование начала и конца теста
   infoTestLog: [
     async ({ logger }, use, testInfo) => {
       const indexOfTestSubfolderStart = testInfo.file.indexOf('/tests') + 7;
