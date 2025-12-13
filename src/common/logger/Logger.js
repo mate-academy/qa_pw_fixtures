@@ -1,4 +1,3 @@
-const { test } = require('@playwright/test');
 export class Logger {
   constructor(level = 'info') {
     this.levels = ['debug', 'info', 'warn', 'error'];
@@ -29,12 +28,3 @@ export class Logger {
     this.log('error', message);
   }
 }
-
-const logger = new Logger('debug');
-
-test('logger', async () => {
-  logger.debug();
-  logger.info();
-  logger.warn();
-  logger.error();
-});
