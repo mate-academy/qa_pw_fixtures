@@ -4,11 +4,11 @@ import { generateNewUserData } from '../../src/common/testData/generateNewUserDa
 
 export const test = base.extend<
   {
-    user;
-    infoTestLog;
+    user: any;
+    infoTestLog: string;
   },
   {
-    logger;
+    logger: Logger;
   }
 >({
   user: async ({ logger }, use) => {
@@ -19,7 +19,7 @@ export const test = base.extend<
   logger: [
     async ({}, use) => {
       const logger = new Logger('error');
-
+  
       await use(logger);
     },
     { scope: 'worker' },
