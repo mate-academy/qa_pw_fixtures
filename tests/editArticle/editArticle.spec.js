@@ -58,7 +58,8 @@ test('Edit the article description for the existing article', async ({
     await editArticlePage.fillDescriptionField(UPDATED_DESCRIPTION);
     await editArticlePage.clickPublishArticleButton();
 
-    await viewArticlePage.assertArticleDescriptionIsVisible(UPDATED_DESCRIPTION);
+    await viewArticlePage
+      .assertArticleDescriptionIsVisible(UPDATED_DESCRIPTION);
 });
 
 test('Edit the article text for the existing article', async ({
