@@ -37,7 +37,7 @@ test('Edit the article title for the existing article', async ({
     await editArticlePage.fillTitleField(UPDATED_TITLE);
     await editArticlePage.clickPublishArticleButton();
 
-    await viewArticlePage.assertArticleTitleIsVisible(articleWithoutTags.title);
+    await viewArticlePage.assertArticleTitleIsVisible(UPDATED_TITLE);
 });
 
 test('Edit the article description for the existing article', async ({
@@ -58,7 +58,7 @@ test('Edit the article description for the existing article', async ({
     await editArticlePage.fillDescriptionField(UPDATED_DESCRIPTION);
     await editArticlePage.clickPublishArticleButton();
 
-    await viewArticlePage.assertArticleTitleIsVisible(articleWithoutTags.title);
+    await viewArticlePage.assertArticleDescriptionIsVisible(UPDATED_DESCRIPTION);
 });
 
 test('Edit the article text for the existing article', async ({
@@ -79,7 +79,7 @@ test('Edit the article text for the existing article', async ({
     await editArticlePage.fillTextField(UPDATED_TEXT);
     await editArticlePage.clickPublishArticleButton();
 
-    await viewArticlePage.assertArticleTextIsVisible(articleWithoutTags.text);
+    await viewArticlePage.assertArticleTextIsVisible(UPDATED_TEXT);
 });
 
 test('Add the tag for the existing article without tags', async ({
@@ -231,6 +231,7 @@ test('Edit multiple fields at once for the existing article', async ({
     await editArticlePage.fillTextField(MULTI_TEXT);
     await editArticlePage.clickPublishArticleButton();
 
-    await viewArticlePage.assertArticleTitleIsVisible(articleWithoutTags.title);
-    await viewArticlePage.assertArticleTextIsVisible(articleWithoutTags.text);
+    await viewArticlePage.assertArticleTitleIsVisible(MULTI_TITLE);
+    await viewArticlePage.assertArticleDescriptionIsVisible(MULTI_DESCRIPTION);
+    await viewArticlePage.assertArticleTextIsVisible(MULTI_TEXT);
 });
