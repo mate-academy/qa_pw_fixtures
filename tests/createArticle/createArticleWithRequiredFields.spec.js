@@ -6,14 +6,20 @@ test.beforeEach(async ({ page, user }) => {
 });
 
 test('Create an article with required fields', 
-  async ({ homePage, createArticlePage, viewArticlePage, articleData }) => {
+  async ({ 
+    homePage, 
+    createArticlePage, 
+    viewArticlePage, 
+    articleWithoutTags 
+  }) => {
+    
   await homePage.clickNewArticleLink();
 
-  await createArticlePage.fillTitleField(articleData.title);
-  await createArticlePage.fillDescriptionField(articleData.description);
-  await createArticlePage.fillTextField(articleData.text);
+  await createArticlePage.fillTitleField(articleWithoutTags.title);
+  await createArticlePage.fillDescriptionField(articleWithoutTags.description);
+  await createArticlePage.fillTextField(articleWithoutTags.text);
   await createArticlePage.clickPublishArticleButton();
 
-  await viewArticlePage.assertArticleTitleIsVisible(articleData.title);
-  await viewArticlePage.assertArticleTextIsVisible(articleData.text);
+  await viewArticlePage.assertArticleTitleIsVisible(articleWithoutTags.title);
+  await viewArticlePage.assertArticleTextIsVisible(articleWithoutTags.text);
 });
