@@ -77,13 +77,14 @@ test.describe('tests for editing tags in article without tags', () => {
   });
   
   test('Add tags to article without tags', 
-    async({ page, editArticlePage, viewArticlePage, articleWithoutTags }) => {
+    async({ page, editArticlePage, viewArticlePage }) => {
     await editArticlePage.clickEditPageButton();
     
-    await editArticlePage.fillTagField(articleWithoutTags.tags);
+    const newTags = ['new-tag1', 'new-tag2'];
+    await editArticlePage.fillTagField(newTags);
     await editArticlePage.clickUpdateArticleButton();
     await waitAndReloadArticlePage(page);
-    await viewArticlePage.assertArticleTagsAreVisible(articleWithoutTags.tags);
+    await viewArticlePage.assertArticleTagsAreVisible(newTags);
   })
 })
 
@@ -116,10 +117,11 @@ test.describe('tests for editing tags in article with tags', () => {
     
     await editArticlePage.clickEditPageButton();
     
-    await editArticlePage.fillTagField(articleWithTwoTags.tags);
+    const newTags = ['new-tag1', 'new-tag2'];
+    await editArticlePage.fillTagField(newTags);
     await editArticlePage.clickUpdateArticleButton();
     await waitAndReloadArticlePage(page);
-    await viewArticlePage.assertArticleTagsAreVisible(articleWithTwoTags.tags);
+    await viewArticlePage.assertArticleTagsAreVisible(newTags);
     await viewArticlePage.assertArticleTagsAreVisible(articleWithTwoTags.tags);
   })
 })
