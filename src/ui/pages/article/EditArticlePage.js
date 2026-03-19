@@ -1,20 +1,63 @@
-import { test, expect } from '@playwright/test';
-
+import { expect, test } from '@playwright/test';
+import { CreateArticlePage } from './CreateArticlePage';
 export class EditArticlePage {
   constructor(page) {
     this.page = page;
-    this.articleTitleHeader = page.getByRole('heading');
+    this.createArticlePage = new CreateArticlePage(page);
+    this.editArticleButton = page
+      .getByRole('link', { name: ' Edit Article' })
+      .first();
+    this.removeTag = page.locator('.ion-close-round');
+    this.updateArticle = page.getByRole('button', { name: 'Update Article' });
   }
 
-  async assertArticleTitle(title) {
-    await test.step(`Assert the article has correct title'`, async () => {
-      await expect(this.articleTitleHeader).toContainText(title);
+  async editArticleField(field, newValue) {
+    await test.step(`Edit existing article ${field} field`, async () => {
+      await this.createArticlePage[field].click();
+
+      // eslint-disable-next-line playwright/no-conditional-in-test
+      if (field === 'tagsField') {
+        await this.createArticlePage[field].fill(newValue);
+        await this.createArticlePage.pressEnterInTagsField();
+      } else {
+        await this.createArticlePage[field].fill(newValue);
+      }
+      await Promise.all([
+        this.page.waitForURL('**/article/**'),
+        this.clickUpdateArticleButton(),
+      ]);
     });
   }
 
-  async assertArticleText(text) {
-    await test.step(`Assert the article has correct text'`, async () => {
-      await expect(this.page.getByText(text)).toBeVisible();
+  async clickEditArticle() {
+    await test.step(`Click on the Edit Article button`, async () => {
+      await this.editArticleButton.click();
+    });
+  }
+
+  async removeTags() {
+    await test.step('Remove tag for the article with tag', async () => {
+      await this.removeTag.click();
+    });
+  }
+
+  async clearInput(input) {
+    await test.step(`Remove a ${input} for the existing article`, async () => {
+      await this.createArticlePage[input].fill('');
+    });
+  }
+
+  async clickUpdateArticleButton() {
+    await test.step(`Click the 'Update Article' button`, async () => {
+      await this.updateArticle.click();
+    });
+  }
+
+  async assertErrorMessageContainsText(messageText) {
+    await test.step(`Assert the '${messageText}' error is shown`, async () => {
+      await expect(this.createArticlePage.errorMessage).toContainText(
+        messageText,
+      );
     });
   }
 }
