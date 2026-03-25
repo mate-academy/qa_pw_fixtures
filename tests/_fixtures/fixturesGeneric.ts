@@ -4,35 +4,33 @@ import { generateNewUserData } from '../../src/common/testData/generateNewUserDa
 
 export const test = base.extend<
   {
-    user;
-    infoTestLog;
+    user: ReturnType<typeof generateNewUserData>;
+    infoTestLog: string;
   },
   {
-    logger;
+    logger: Logger;
   }
 >({
-  user: async ({ logger }, use) => {
-    const user = generateNewUserData(logger);
-
-    await use(user);
-  },
   logger: [
     async ({}, use) => {
       const logger = new Logger('error');
-
       await use(logger);
     },
     { scope: 'worker' },
   ],
+
+  user: async ({ logger }, use) => {
+    const user = generateNewUserData(logger);
+    await use(user);
+  },
+
   infoTestLog: [
     async ({ logger }, use, testInfo) => {
       const indexOfTestSubfolderStart = testInfo.file.indexOf('/tests') + 7;
       const fileName = testInfo.file.substring(indexOfTestSubfolderStart);
 
       logger.info(`Test started: ${fileName}`);
-
       await use('infoTestLog');
-
       logger.info(`Test completed: ${fileName}`);
     },
     { scope: 'test', auto: true },
