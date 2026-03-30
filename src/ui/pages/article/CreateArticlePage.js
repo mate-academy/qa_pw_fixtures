@@ -35,6 +35,8 @@ export class CreateArticlePage {
     for (const tag of tags) {
       await this.tagsField.fill(tag);
       await this.tagsField.press('Enter');
+      await this.tagsChip(tag).waitFor();
+      await this.tagsField.clear();
     }
   });
 }
