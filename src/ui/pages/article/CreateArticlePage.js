@@ -10,6 +10,9 @@ export class CreateArticlePage {
       name: 'Publish Article',
     });
     this.errorMessage = page.getByRole('list').nth(1);
+    this.tagsField = page.getByPlaceholder('Enter tags');
+    this.tagsChip = (tag) => page.locator('div.tag-list')
+    .filter({ hasText: tag });
   }
 
   async fillTitleField(title) {
@@ -29,7 +32,16 @@ export class CreateArticlePage {
       await this.textField.fill(text);
     });
   }
-
+  async fillTagsField(tags) {
+  await test.step(`Fill the 'Tags' field`, async () => {
+    for (const tag of tags) {
+      await this.tagsField.fill(tag);
+      await this.tagsField.press('Enter');
+      await this.tagsChip(tag).waitFor();
+      await this.tagsField.clear();
+    }
+  });
+}
   async clickPublishArticleButton() {
     await test.step(`Click the 'Publish Article' button`, async () => {
       await this.publishArticleButton.click();
