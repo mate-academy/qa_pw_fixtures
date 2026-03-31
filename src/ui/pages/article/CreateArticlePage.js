@@ -11,6 +11,8 @@ export class CreateArticlePage {
     });
     this.errorMessage = page.getByRole('list').nth(1);
     this.tagsField = page.getByPlaceholder('Enter tags');
+    this.tagsChip = (tag) => page.locator('div.tag-list')
+    .filter({ hasText: tag });
   }
 
   async fillTitleField(title) {
