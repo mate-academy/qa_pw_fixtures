@@ -1,0 +1,27 @@
+import { test } from '@playwright/test';
+
+export async function createNewArticle(
+    customData = {},
+    createArticlePage,
+    homePage,
+    articlePageData
+) {
+    const data = { ...articlePageData, ...customData };
+
+    await test.step('Navigate to Create Article page', async () => {
+        await homePage.clickNewArticleLink();
+    });
+
+    await test.step(`Fill article fields: ${data.title}`, async () => {
+        await createArticlePage.fillTitleField(data.title);
+        await createArticlePage.fillDescriptionField(data.description);
+        await createArticlePage.fillTextField(data.body);
+        await createArticlePage.fillTagsField(data.tags);
+    });
+
+    await test.step('Publish the article', async () => {
+        await createArticlePage.clickPublishArticleButton();
+    });
+
+    return data;
+}

@@ -1,19 +1,56 @@
-import { test } from '../_fixtures/fixtures';
-import { CreateArticlePage } from '../../src/ui/pages/article/CreateArticlePage';
-import { signUpUser } from '../../src/ui/actions/auth/signUpUser';
-import { TITLE_CANNOT_BE_EMPTY } from '../../src/ui/constants/articleErrorMessages';
+import { test } from '../fixtures/fixturesMain';
+import { createNewArticle } from '../../src/ui/actions/article/createNewArticle';
+import {
+    BODY_CANNOT_BE_EMPTY,
+    DESCRIPTION_CANNOT_BE_EMPTY,
+    TITLE_CANNOT_BE_EMPTY,
+} from '../../src/ui/constants/articleErrorMessages';
+import { CheckArticleUtil } from '../../src/ui/actions/article/CheckArticleUtil';
 
-let createArticlePage;
+test('Create an article without title field', async ({createArticlePage, homePage, articleWithoutTags}) => {
+    await createNewArticle(
+        { title: ''},
+        createArticlePage,
+        homePage,
+        articleWithoutTags
+    );
 
-test.beforeEach(async ({ page, user }) => {
-  createArticlePage = new CreateArticlePage(page);
-
-  await signUpUser(page, user);
+    await createArticlePage.assertErrorMessageContainsText(TITLE_CANNOT_BE_EMPTY);
 });
 
-test('Creat an article without required fields', async ({ homePage }) => {
-  await homePage.clickNewArticleLink();
+test('Create an article without description field', async ({createArticlePage, homePage, articleWithOneTag}) => {
+    await createNewArticle(
+        { description: ''},
+        createArticlePage,
+        homePage,
+        articleWithOneTag
+    );
 
-  await createArticlePage.clickPublishArticleButton();
-  await createArticlePage.assertErrorMessageContainsText(TITLE_CANNOT_BE_EMPTY);
+    await createArticlePage.assertErrorMessageContainsText(DESCRIPTION_CANNOT_BE_EMPTY);
+});
+
+test('Create an article without body field', async ({createArticlePage, homePage, articleWithTwoTags}) => {
+    await createNewArticle(
+        { body: ''},
+        createArticlePage,
+        homePage,
+        articleWithTwoTags
+    );
+
+    await createArticlePage.assertErrorMessageContainsText(BODY_CANNOT_BE_EMPTY);
+});
+
+test('Create an article without tags field', async (
+    {
+        createArticlePage,
+        homePage,
+        articleWithoutTags,
+        viewArticlePage }) => {
+    const createdArticleData = await createNewArticle(
+        createArticlePage,
+        homePage,
+        articleWithoutTags
+    );
+
+    await CheckArticleUtil.checkErrorMessageVisible(createdArticleData, viewArticlePage)
 });

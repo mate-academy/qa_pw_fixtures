@@ -13,11 +13,13 @@ export const test = base.extend<{
 
     await use(signUpPage);
   },
+
   signInPage: async ({ page }, use) => {
     const signInPage = new SignInPage(page);
 
     await use(signInPage);
   },
+
   homePage: async ({ page }, use) => {
     const homePage = new HomePage(page);
 

@@ -4,8 +4,9 @@ export class CreateArticlePage {
   constructor(page) {
     this.page = page;
     this.titleField = page.getByPlaceholder('Article Title');
-    this.descriptionField = page.getByPlaceholder(`What's this article about?`);
+    this.descriptionField = page.getByPlaceholder("What's this article about?");
     this.textField = page.getByPlaceholder('Write your article (in markdown)');
+    this.tagsField = page.getByPlaceholder('Tags');
     this.publishArticleButton = page.getByRole('button', {
       name: 'Publish Article',
     });
@@ -28,6 +29,17 @@ export class CreateArticlePage {
     await test.step(`Fill the 'Text' field`, async () => {
       await this.textField.fill(text);
     });
+  }
+
+  async fillTagsField(tags) {
+    if (!Array.isArray(tags) || tags.length === 0) {
+      return;
+    }
+
+    for (const tag of tags) {
+      await this.tagsField.fill(tag);
+      await this.page.keyboard.press('Enter');
+    }
   }
 
   async clickPublishArticleButton() {
