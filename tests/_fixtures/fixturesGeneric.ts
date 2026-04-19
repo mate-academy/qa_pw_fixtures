@@ -8,7 +8,7 @@ export const test = base.extend<
     infoTestLog;
   },
   {
-    logger;
+    logger: Logger;
   }
 >({
   user: async ({ logger }, use) => {
