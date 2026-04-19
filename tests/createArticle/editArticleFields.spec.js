@@ -8,11 +8,11 @@ test.beforeEach(
     async ({ page, user, createArticlePage, homePage, articleWithTwoTags }) => {
         await signUpUser(page, user);
 
-        await createNewArticle(
+        await createNewArticle({
             createArticlePage,
             homePage,
             articleWithTwoTags,
-        );
+        });
     },
 );
 

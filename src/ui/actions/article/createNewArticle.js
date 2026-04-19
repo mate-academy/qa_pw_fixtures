@@ -1,11 +1,12 @@
 import { test } from '@playwright/test';
 
-export async function createNewArticle(
+export async function createNewArticle({
     customData = {},
     createArticlePage,
     homePage,
-    articlePageData
-) {
+    articlePageData,
+}) {
+    // customData overrides default fields from articlePageData
     const data = { ...articlePageData, ...customData };
 
     await test.step('Navigate to Create Article page', async () => {

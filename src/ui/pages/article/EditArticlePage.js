@@ -16,6 +16,12 @@ export class EditArticlePage {
         })
     }
 
+    async waitForArticleTitle() {
+        await test.step(`Wait for Article Title`, async () => {
+            await this.titleField.waitFor({state: 'visible'});
+        })
+    }
+
     async fillTitleField(title) {
         await test.step(`Fill the 'Title' field`, async () => {
             await this.titleField.fill(title);

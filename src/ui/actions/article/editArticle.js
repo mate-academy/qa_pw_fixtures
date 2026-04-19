@@ -8,7 +8,9 @@ export async function editArticle(editData = {}, page) {
         const viewArticlePage = new ViewArticlePage(page)
 
         await viewArticlePage.clickEditArticle()
+        await editArticlePage.waitForArticleTitle()
 
+        // if providedData fields are null it is mapped to ''
         if (editData.title !== undefined) {
             await editArticlePage.fillTitleField(editData.title ?? '')
         }

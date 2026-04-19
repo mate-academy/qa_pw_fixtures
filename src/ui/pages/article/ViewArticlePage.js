@@ -28,8 +28,6 @@ export class ViewArticlePage {
 
     async assertArticleTitleIsVisible(title) {
         await test.step(`Assert the article has correct title'`, async () => {
-            await this.page.waitForTimeout(3000);
-
             await this.articleTitleHeader.waitFor({state: 'visible'});
             await expect(this.articleTitleHeader).toContainText(title);
         });
