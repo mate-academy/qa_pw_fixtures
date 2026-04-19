@@ -1,4 +1,4 @@
-import { test } from '../_fixtures/fixtures';
+import { test } from '../fixtures/fixturesMain';
 import {
   EMPTY_EMAIL_MESSAGE,
   EMPTY_PASSWORD_MESSAGE,

@@ -12,7 +12,7 @@
 ## Task
 
 1. Add all the edit article tests you have created in the previous homework.
-2. Create the `fixturesArticles.ts` file in the `tests/_fixtures` folder.
+2. Create the `ArticleFixtures.ts` file in the `tests/_fixtures` folder.
 3. Add the following test scope fixtures to the file:
 
     - `createArticlePage` to initialize the `CreateArticlePage` page
@@ -22,7 +22,7 @@
     - `articleWithOneTag` to generate random article test data
     - `articleWithTwoTags` to generate random article test data
 
-4. Merge fixtures from the `fixturesArticles.ts` to the `fixtures.ts` file.
+4. Merge fixtures from the `ArticleFixtures.ts` to the `fixturesMain.ts` file.
 5. Add a logger to the input parameters of the `generateNewArticleData.js`, outputting a message `New article generated: ${article}` to the debug log. Use the `generateNewUserData.js` file as an example.
 6. Update all the article tests to use fixtures.
 7. Re-run all your tests and make sure they pass after the updates.
