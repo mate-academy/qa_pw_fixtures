@@ -57,5 +57,5 @@ test('Create an article without tags field', async ({
         articleWithoutTags
     });
 
-    await CheckArticleUtil.checkErrorMessageVisible(createdArticleData, viewArticlePage)
+    await CheckArticleUtil.checkArticleFields(createdArticleData, viewArticlePage)
 });

@@ -2,7 +2,7 @@ import { test as base } from '@playwright/test';
 import { ViewArticlePage } from '../../src/ui/pages/article/ViewArticlePage';
 import { EditArticlePage } from '../../src/ui/pages/article/EditArticlePage';
 import { CreateArticlePage } from '../../src/ui/pages/article/CreateArticlePage';
-import {generateNewArticleData} from '../../src/common/testData/generateNewArticleData'
+import { generateNewArticleData } from '../../src/common/testData/generateNewArticleData'
 
 export const test = base.extend<{
     createArticlePage,

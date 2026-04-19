@@ -13,7 +13,7 @@ export class ViewArticlePage {
             .first()
             .getByRole('listitem')
             .first();
-        this.clickDeleteArticleButton = page.getByRole('button', {
+        this.deleteArticleButton = page.getByRole('button', {
             name: 'Delete Article',
         });
     }
@@ -23,24 +23,24 @@ export class ViewArticlePage {
     }
 
     async clickDeleteArticleButton() {
-        await this.clickDeleteArticleButton.click();
+        await this.deleteArticleButton.click();
     }
 
     async assertArticleTitleIsVisible(title) {
-        await test.step(`Assert the article has correct title'`, async () => {
+        await test.step(`Assert the article has correct title`, async () => {
             await this.articleTitleHeader.waitFor({state: 'visible'});
             await expect(this.articleTitleHeader).toContainText(title);
         });
     }
 
     async assertArticleTextIsVisible(text) {
-        await test.step(`Assert the article has correct text'`, async () => {
+        await test.step(`Assert the article has correct text`, async () => {
             await expect(this.page.getByText(text)).toBeVisible();
         });
     }
 
     async assertArticleTagsVisible(tags) {
-        await test.step(`Assert the articles tags are visible'`, async () => {
+        await test.step(`Assert the articles tags are visible`, async () => {
             await expect(this.articleTags).toContainText(tags);
         });
     }

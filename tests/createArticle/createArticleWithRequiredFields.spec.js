@@ -5,7 +5,7 @@ test.beforeEach(async ({ page, user }) => {
   await signUpUser(page, user);
 });
 
-test('Creat an article with required fields', async ({
+test('Create an article with required fields', async ({
   homePage,
   createArticlePage,
   viewArticlePage,
@@ -15,9 +15,9 @@ test('Creat an article with required fields', async ({
 
   await createArticlePage.fillTitleField(articleWithoutTags.title);
   await createArticlePage.fillDescriptionField(articleWithoutTags.description);
-  await createArticlePage.fillTextField(articleWithoutTags.text);
+  await createArticlePage.fillTextField(articleWithoutTags.body);
   await createArticlePage.clickPublishArticleButton();
 
   await viewArticlePage.assertArticleTitleIsVisible(articleWithoutTags.title);
-  await viewArticlePage.assertArticleTextIsVisible(articleWithoutTags.text);
+  await viewArticlePage.assertArticleTextIsVisible(articleWithoutTags.body);
 });
