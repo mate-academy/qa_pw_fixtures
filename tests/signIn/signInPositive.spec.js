@@ -1,19 +1,13 @@
 import { test } from '../_fixtures/fixtures';
+import { signUpUser } from '../../src/ui/actions/auth/signUpUser';
 
 let user;
 
-test.beforeEach(async ({}) => {
-  user = {
-    email: 'test_new_user@gmail.com',
-    password: 'newpass123!',
-  };
+test.beforeEach(async ({ newUserData, page }) => {
+  user = newUserData;
+  await signUpUser(page, user);
 });
 
-test('Successful `Sign in` flow test', async ({ signInPage, homePage }) => {
-  await signInPage.open();
-  await signInPage.fillEmailField(user.email);
-  await signInPage.fillPasswordField(user.password);
-  await signInPage.clickSignInButton();
-
+test('Successful `Sign in` flow test', async ({ homePage }) => {
   await homePage.assertYourFeedTabIsVisible();
 });
