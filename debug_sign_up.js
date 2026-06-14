@@ -1,0 +1,21 @@
+const { chromium } = require('playwright');
+(async () => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+  await page.goto('https://conduit.mate.academy/user/register');
+  const username = 'testuser' + Date.now();
+  const email = username + '@example.com';
+  const password = 'Password123!';
+  console.log('filling', username, email);
+  await page.locator('input[placeholder="Username"]').fill(username);
+  await page.locator('input[placeholder="Email"]').fill(email);
+  await page.locator('input[placeholder="Password"]').fill(password);
+  await page.locator('button:has-text("Sign up")').click();
+  await page.waitForLoadState('networkidle');
+  console.log('URL after sign-up', page.url());
+  const yourFeedCount = await page.locator('a:has-text("Your Feed")').count();
+  console.log('Your Feed count after sign-up', yourFeedCount);
+  const bodyText = await page.locator('body').innerText();
+  console.log('body after sign-up first 400 chars:\n', bodyText.slice(0,400));
+  await browser.close();
+})();
