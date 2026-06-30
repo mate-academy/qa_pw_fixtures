@@ -24,7 +24,6 @@ test.describe('Article Management', () => {
   test('Edit the description for the existing article', async ({ 
     page,
     articleWithOneTag,
-    // viewArticlePage,
   }) => {
 
     const newDescription = articleWithOneTag.description;

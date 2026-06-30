@@ -1,7 +1,6 @@
 import { HomePage } from "../../pages/HomePage";
 import { CreateArticlePage } from "../../pages/article/CreateArticlePage";
 import { test } from "@playwright/test";
-// import { test } from '../_fixtures/fixtures';
 
 export async function createNewArticle(page, article) {
   await test.step(`Create new article`, async () => {

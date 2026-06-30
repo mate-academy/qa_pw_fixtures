@@ -1,4 +1,4 @@
-import { test } from '../_fixtures/fixtures'
+import { test } from '../_fixtures/fixtures';
 import { signUpUser } from '../../src/ui/actions/auth/signUpUser';
 import { createNewArticle } from '../../src/ui/actions/auth/createNewArticle';
 import { editExistingArticleText } from '../../src/ui/actions/auth/editExistingArticle';
