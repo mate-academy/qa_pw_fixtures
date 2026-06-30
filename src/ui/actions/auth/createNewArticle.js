@@ -1,6 +1,7 @@
 import { HomePage } from "../../pages/HomePage";
 import { CreateArticlePage } from "../../pages/article/CreateArticlePage";
 import { test } from "@playwright/test";
+// import { test } from '../_fixtures/fixtures';
 
 export async function createNewArticle(page, article) {
   await test.step(`Create new article`, async () => {
@@ -13,6 +14,7 @@ export async function createNewArticle(page, article) {
     await createNewArticlePage.fillDescriptionField(article.description);
     await createNewArticlePage.fillTextField(article.text);
 
+    // eslint-disable-next-line playwright/no-conditional-in-test
     if (article.tags?.length > 0) {
       for (const tag of article.tags) {
         await createNewArticlePage.fillTagsField(tag);

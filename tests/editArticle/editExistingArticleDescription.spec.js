@@ -2,9 +2,7 @@ import { test } from '../_fixtures/fixtures';
 import { signUpUser } from '../../src/ui/actions/auth/signUpUser';
 import { createNewArticle } from '../../src/ui/actions/auth/createNewArticle';
 import { editExistingArticleDescription } from '../../src/ui/actions/auth/editExistingArticle';
-import { ViewArticlePage } from '../../src/ui/pages/article/ViewArticlePage';
 
-// let user;
 
 test.describe('Article Management', () => {
   let originalArticle;
@@ -13,9 +11,9 @@ test.describe('Article Management', () => {
     page,
     user,
     articleWithoutTags,
+    viewArticlePage
    }) => {
     originalArticle = articleWithoutTags;
-    const viewArticlePage = new ViewArticlePage(page);
 
     await signUpUser(page, user);
 
@@ -26,13 +24,10 @@ test.describe('Article Management', () => {
   test('Edit the description for the existing article', async ({ 
     page,
     articleWithOneTag,
+    // viewArticlePage,
   }) => {
-    // const profilePage = new ProfilePage(page);
 
     const newDescription = articleWithOneTag.description;
     await editExistingArticleDescription(page, newDescription);
-
-    // await profilePage.clickProfileLink(user.username);
-    // await profilePage.assertArticleDescriptionIsVisible(newDescription);
   });
 });

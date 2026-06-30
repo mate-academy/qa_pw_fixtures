@@ -2,7 +2,6 @@ import { test } from '../_fixtures/fixtures'
 import { signUpUser } from '../../src/ui/actions/auth/signUpUser';
 import { createNewArticle } from '../../src/ui/actions/auth/createNewArticle';
 import { editExistingArticleTitle } from '../../src/ui/actions/auth/editExistingArticle';
-import { ViewArticlePage } from '../../src/ui/pages/article/ViewArticlePage';
 
 test.describe('Article Management', () => {
   let originalArticle;
@@ -11,9 +10,9 @@ test.describe('Article Management', () => {
     page,
     user,
     articleWithoutTags,
+    viewArticlePage,
   }) => {
     originalArticle = articleWithoutTags;
-    const viewArticlePage = new ViewArticlePage(page);
 
     await signUpUser(page, user);
     await createNewArticle(page, originalArticle);
@@ -23,8 +22,8 @@ test.describe('Article Management', () => {
   test('Edit the title for the existing article', async ({ 
     page,
     articleWithOneTag,
+    viewArticlePage,
   }) => {
-    const viewArticlePage = new ViewArticlePage(page);
 
     const newTitle = articleWithOneTag.title;
 

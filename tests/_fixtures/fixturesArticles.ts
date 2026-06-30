@@ -29,7 +29,7 @@ export const test = base.extend<{
     await use(viewArticlePage);
   },
 
-  editArticlePage: async ({page}, use) => {
+  editArticlePage: async ({page}, use: any) => {
     const editArticlePage = new EditArticlePage(page);
 
     await use(editArticlePage);
