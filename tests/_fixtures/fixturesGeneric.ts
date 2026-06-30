@@ -4,11 +4,11 @@ import { generateNewUserData } from '../../src/common/testData/generateNewUserDa
 
 export const test = base.extend<
   {
-    user;
-    infoTestLog;
+    user: ReturnType<typeof generateNewUserData>;
+    infoTestLog: string;
   },
   {
-    logger;
+    logger: Logger;
   }
 >({
   user: async ({ logger }, use) => {
