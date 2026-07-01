@@ -11,23 +11,28 @@ test.describe('Article Management', () => {
     user,
     articleWithoutTags,
     viewArticlePage,
+    createArticlePage,
+    homePage,
   }) => {
     originalArticle = articleWithoutTags;
 
     await signUpUser(page, user);
-    await createNewArticle(page, originalArticle);
+    await homePage.clickNewArticleLink();
+    await createNewArticle(createArticlePage, originalArticle);
     await viewArticlePage.assertArticleTitleIsVisible(originalArticle.title);
   });
 
   test('Edit the title for the existing article', async ({ 
-    page,
     articleWithOneTag,
     viewArticlePage,
+    createArticlePage,
   }) => {
 
     const newTitle = articleWithOneTag.title;
 
-    await editExistingArticleTitle(page, newTitle);
+    await editExistingArticleTitle(
+      viewArticlePage, createArticlePage, newTitle
+    );
     await viewArticlePage.assertArticleTitleIsVisible(newTitle);
   });
 });

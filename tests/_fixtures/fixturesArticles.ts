@@ -3,11 +3,13 @@ import {CreateArticlePage} from '../../src/ui/pages/article/CreateArticlePage';
 import {ViewArticlePage} from '../../src/ui/pages/article/ViewArticlePage';
 import {EditArticlePage} from '../../src/ui/pages/article/EditArticlePage';
 import {generateNewArticleData} from '../../src/common/testData/generateNewArticleData';
+import { HomePage } from "../../src/ui/pages/HomePage";
 
 export const test = base.extend<{
   createArticlePage;
   viewArticlePage;
   editArticlePage;
+  homePage;
 
   articleWithoutTags;
   articleWithOneTag;
@@ -33,6 +35,12 @@ export const test = base.extend<{
     const editArticlePage = new EditArticlePage(page);
 
     await use(editArticlePage);
+  },
+
+  homePage: async ({page}, use) => {
+    const homePage = new HomePage(page);
+
+    await use(homePage);
   },
 
   articleWithoutTags: async ({ logger }, use) => {

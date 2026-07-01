@@ -1,25 +1,18 @@
-import { HomePage } from "../../pages/HomePage";
-import { CreateArticlePage } from "../../pages/article/CreateArticlePage";
 import { test } from "@playwright/test";
 
-export async function createNewArticle(page, article) {
+export async function createNewArticle(createArticlePage, article) {
   await test.step(`Create new article`, async () => {
-    const homePage = new HomePage(page);
-    const createNewArticlePage = new CreateArticlePage(page);
-
-    await homePage.clickNewArticleLink();
-
-    await createNewArticlePage.fillTitleField(article.title);
-    await createNewArticlePage.fillDescriptionField(article.description);
-    await createNewArticlePage.fillTextField(article.text);
+    await createArticlePage.fillTitleField(article.title);
+    await createArticlePage.fillDescriptionField(article.description);
+    await createArticlePage.fillTextField(article.text);
 
     // eslint-disable-next-line playwright/no-conditional-in-test
     if (article.tags?.length > 0) {
       for (const tag of article.tags) {
-        await createNewArticlePage.fillTagsField(tag);
+        await createArticlePage.fillTagsField(tag);
       }
     }
 
-    await createNewArticlePage.clickPublishArticleButton();
+    await createArticlePage.clickPublishArticleButton();
   });
 }

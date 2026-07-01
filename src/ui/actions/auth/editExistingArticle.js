@@ -2,43 +2,43 @@ import { test } from '@playwright/test';
 import { ViewArticlePage } from '../../pages/article/ViewArticlePage';
 import { CreateArticlePage } from '../../pages/article/CreateArticlePage';
 
-export async function editExistingArticleTitle(page, newTitle) {
+export async function editExistingArticleTitle(
+  viewArticlePage, createArticlePage, newTitle
+) {
   await test.step(`Edit existing article title to: "${newTitle}"`, async () => {
-    const viewArticlePage = new ViewArticlePage(page);
-    const editorPage = new CreateArticlePage(page);
 
     await viewArticlePage.clickEditArticleButton();
 
-    await editorPage.fillTitleField(newTitle);
+    await createArticlePage.fillTitleField(newTitle);
 
-    await editorPage.clickUpdateArticleButton();
+    await createArticlePage.clickUpdateArticleButton();
   });
 }
 
-export async function editExistingArticleDescription(page, newDescription) {
+export async function editExistingArticleDescription(
+  viewArticlePage, createArticlePage, newDescription
+) {
   await test.step(`Edit existing article description to: 
     "${newDescription}"`, async () => {
-    const viewArticlePage = new ViewArticlePage(page);
-    const editorPage = new CreateArticlePage(page);
 
     await viewArticlePage.clickEditArticleButton();
 
-    await editorPage.fillDescriptionField(newDescription);
+    await createArticlePage.fillDescriptionField(newDescription);
 
-    await editorPage.clickUpdateArticleButton();
+    await createArticlePage.clickUpdateArticleButton();
   });
 }
 
-export async function editExistingArticleText(page, newText) {
+export async function editExistingArticleText(
+  viewArticlePage, createArticlePage, newText
+) {
   await test.step(`Edit existing article text to: "${newText}"`, async () => {
-    const viewArticlePage = new ViewArticlePage(page);
-    const editorPage = new CreateArticlePage(page);
 
     await viewArticlePage.clickEditArticleButton();
 
-    await editorPage.fillTextField(newText);
+    await createArticlePage.fillTextField(newText);
 
-    await editorPage.clickUpdateArticleButton();
+    await createArticlePage.clickUpdateArticleButton();
   });
 }
 
