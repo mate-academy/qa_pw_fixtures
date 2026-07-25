@@ -10,6 +10,7 @@ export const test = base.extend<{
   editArticlePage;
   articleWithoutTags;
   articleWithOneTag;
+  articleWithTwoTags;
 }>({
   createArticlePage: async ({ page }, use) => {
     const createArticlePage = new CreateArticlePage(page);
