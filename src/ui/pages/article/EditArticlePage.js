@@ -1,20 +1,50 @@
 import { test, expect } from '@playwright/test';
+import { CreateArticlePage } from './CreateArticlePage';
 
-export class EditArticlePage {
+export class EditArticlePage extends CreateArticlePage {
   constructor(page) {
-    this.page = page;
-    this.articleTitleHeader = page.getByRole('heading');
+    super(page);
+
+    this.updateArticleButton = page.getByRole('button', {
+      name: 'Update Article',
+    });
+
+    this.removeTagButton = page.locator('.ion-close-round');
   }
 
-  async assertArticleTitle(title) {
-    await test.step(`Assert the article has correct title'`, async () => {
-      await expect(this.articleTitleHeader).toContainText(title);
+  async clickUpdateArticleButton() {
+    await test.step(`Click the 'Update Article' button`, async () => {
+      await this.updateArticleButton.click();
     });
   }
 
-  async assertArticleText(text) {
-    await test.step(`Assert the article has correct text'`, async () => {
-      await expect(this.page.getByText(text)).toBeVisible();
+  async clickRemoveTagButton() {
+    await test.step(`Click the 'Remove Tag' button`, async () => {
+      await this.removeTagButton.click();
+    });
+  }
+
+  async clearTitleField() {
+    await test.step(`Clear the 'Title' field`, async () => {
+      await this.titleField.fill('');
+    });
+  }
+
+  async clearDescriptionField() {
+    await test.step(`Clear the 'Description' field`, async () => {
+      await this.descriptionField.fill('');
+    });
+  }
+
+  async clearTextField() {
+    await test.step(`Clear the 'Text' field`, async () => {
+      await this.textField.fill('');
+    });
+  }
+
+  async assertErrorMessageIsVisible(message) {
+    await test.step(`Assert the error message is visible`, async () => {
+      await expect(this.page.getByText(message)).toBeVisible();
     });
   }
 }
