@@ -4,11 +4,11 @@ import { generateNewUserData } from '../../src/common/testData/generateNewUserDa
 
 export const test = base.extend<
   {
-    user;
-    infoTestLog;
+    user: any;
+    infoTestLog: any;
   },
   {
-    logger;
+    logger: any;
   }
 >({
   user: async ({ logger }, use) => {
@@ -16,6 +16,7 @@ export const test = base.extend<
 
     await use(user);
   },
+  //here we change the levels of logging for the tests, so we can see the logs in the console (info, error, warn, debug)
   logger: [
     async ({}, use) => {
       const logger = new Logger('error');
