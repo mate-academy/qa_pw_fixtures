@@ -4,6 +4,14 @@ export class EditArticlePage {
   constructor(page) {
     this.page = page;
     this.articleTitleHeader = page.getByRole('heading');
+    this.titleField = page.getByPlaceholder('Article Title');
+    this.descriptionField = page.getByPlaceholder("What's this article about?");
+    this.bodyField = page.getByPlaceholder('Write your article (in markdown)');
+    this.tagField = page.getByPlaceholder('Enter tags');
+    this.updateArticleButton = page.getByRole('button', {
+      name: 'Update Article',
+    });
+    this.errorMessage = page.getByRole('list').nth(1);
   }
 
   async assertArticleTitle(title) {
@@ -15,6 +23,66 @@ export class EditArticlePage {
   async assertArticleText(text) {
     await test.step(`Assert the article has correct text'`, async () => {
       await expect(this.page.getByText(text)).toBeVisible();
+    });
+  }
+  async fillTitleField(title) {
+    await test.step(`Fill the 'Title' field`, async () => {
+      await this.titleField.fill(title);
+    });
+  }
+
+  async clearTitleField() {
+    await test.step(`Clear the 'Title' field`, async () => {
+      await this.titleField.clear();
+    });
+  }
+
+  async fillDescriptionField(description) {
+    await test.step(`Fill the 'Description' field`, async () => {
+      await this.descriptionField.fill(description);
+    });
+  }
+
+  async clearDescriptionField() {
+    await test.step(`Clear the 'Description' field`, async () => {
+      await this.descriptionField.clear();
+    });
+  }
+
+  async fillBodyField(text) {
+    await test.step(`Fill the 'Text' field`, async () => {
+      await this.bodyField.fill(text);
+    });
+  }
+
+  async clearBodyField() {
+    await test.step(`Clear the 'Text' field`, async () => {
+      await this.bodyField.clear();
+    });
+  }
+
+  async fillTag(tag) {
+    await test.step(`Fill the 'Tag' field`, async () => {
+      await this.tagField.fill(tag);
+      await this.page.keyboard.press('Enter');
+    });
+  }
+
+  async removeTag() {
+    await test.step(`Remove the tag`, async () => {
+      await this.page.locator('.tag-list .ion-close-round').first().click();
+    });
+  }
+
+  async clickUpdateArticleButton() {
+    await test.step(`Click the 'Update Article' button`, async () => {
+      await this.updateArticleButton.click();
+    });
+  }
+
+  async assertErrorMessageContainsText(messageText) {
+    await test.step(`Assert the '${messageText}' error is shown`, async () => {
+      await expect(this.errorMessage).toContainText(messageText);
     });
   }
 }
