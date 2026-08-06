@@ -66,17 +66,6 @@ export class EditArticlePage {
     });
   }
 
-  async removeAllTags() {
-    await test.step(`Remove all tags`, async () => {
-      let count = await this.tagRemoveIcon.count();
-      while (count > 0) {
-        await this.tagRemoveIcon.first().click();
-        await expect(this.tagRemoveIcon).toHaveCount(count - 1);
-        count = await this.tagRemoveIcon.count();
-      }
-    });
-  }
-
   async removeArticleTitle() {
     await test.step(`Remove title from 'Article Title' field`, async () => {
       await this.titleField.clear();
