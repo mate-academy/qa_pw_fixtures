@@ -1,15 +1,13 @@
+import * as path from 'path';
 import { test as base } from '@playwright/test';
 import { Logger } from '../../src/common/logger/Logger';
 import { generateNewUserData } from '../../src/common/testData/generateNewUserData';
 
+type NewUserData = ReturnType<typeof generateNewUserData>;
+
 export const test = base.extend<
-  {
-    user;
-    infoTestLog;
-  },
-  {
-    logger;
-  }
+  { user: NewUserData; infoTestLog: void },
+  { logger: Logger }
 >({
   user: async ({ logger }, use) => {
     const user = generateNewUserData(logger);
@@ -18,7 +16,7 @@ export const test = base.extend<
   },
   logger: [
     async ({}, use) => {
-      const logger = new Logger('error');
+      const logger = new Logger('debug');
 
       await use(logger);
     },
@@ -26,12 +24,11 @@ export const test = base.extend<
   ],
   infoTestLog: [
     async ({ logger }, use, testInfo) => {
-      const indexOfTestSubfolderStart = testInfo.file.indexOf('/tests') + 7;
-      const fileName = testInfo.file.substring(indexOfTestSubfolderStart);
+      const fileName = path.relative(process.cwd(), testInfo.file);
 
       logger.info(`Test started: ${fileName}`);
 
-      await use('infoTestLog');
+      await use();
 
       logger.info(`Test completed: ${fileName}`);
     },
