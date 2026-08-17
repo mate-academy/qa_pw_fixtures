@@ -1,29 +1,38 @@
 import { test } from '../_fixtures/fixtures';
-import { CreateArticlePage } from '../../src/ui/pages/article/CreateArticlePage';
-import { generateNewArticleData } from '../../src/common/testData/generateNewArticleData';
 import { signUpUser } from '../../src/ui/actions/auth/signUpUser';
-import { ViewArticlePage } from '../../src/ui/pages/article/ViewArticlePage';
 
-let createArticlePage;
-let viewArticlePage;
-let article;
 
-test.beforeEach(async ({ page, user, logger }) => {
-  createArticlePage = new CreateArticlePage(page);
-  viewArticlePage = new ViewArticlePage(page);
-  article = generateNewArticleData(logger);
 
+test.describe('Create an article with required fields', () => {
+  test.beforeEach(async ({ page, user }) => {
   await signUpUser(page, user);
 });
 
-test('Creat an article with required fields', async ({ homePage }) => {
+test('Create an article without tags', 
+  async ({ article, homePage, createArticlePage, viewArticlePage }) => {
+  const articleData = article(0);
+
   await homePage.clickNewArticleLink();
-
-  await createArticlePage.fillTitleField(article.title);
-  await createArticlePage.fillDescriptionField(article.description);
-  await createArticlePage.fillTextField(article.text);
+  await createArticlePage.fillTitleField(articleData.title);
+  await createArticlePage.fillDescriptionField(articleData.description);
+  await createArticlePage.fillTextField(articleData.text);
   await createArticlePage.clickPublishArticleButton();
+  await viewArticlePage.assertArticleTitleIsVisible(articleData.title);
+  await viewArticlePage.assertArticleTextIsVisible(articleData.text);
+});
 
-  await viewArticlePage.assertArticleTitleIsVisible(article.title);
-  await viewArticlePage.assertArticleTextIsVisible(article.text);
+test('Create an article with tags', 
+  async ({ article, homePage, createArticlePage, viewArticlePage }) => {
+  const articleData = article(3);
+  await homePage.clickNewArticleLink();
+  await createArticlePage.fillTitleField(articleData.title);
+  await createArticlePage.fillDescriptionField(articleData.description);
+  await createArticlePage.fillTextField(articleData.text);
+  await createArticlePage.fillTagsField(articleData.tags);
+  await createArticlePage.clickPublishArticleButton();
+  await viewArticlePage.assertArticleTitleIsVisible(articleData.title);
+  await viewArticlePage.assertArticleTextIsVisible(articleData.text);
+  await viewArticlePage.assertArticleTagIsVisible(articleData.tags);
+});
+
 });
