@@ -14,5 +14,4 @@ export class ViewProfilePage {
     await expect(this.articleDescription).toContainText(title);
   });
 }
-
 }

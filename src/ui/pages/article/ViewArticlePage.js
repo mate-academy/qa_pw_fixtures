@@ -52,5 +52,4 @@ export class ViewArticlePage {
       await expect(this.tagList).toBeHidden();
     });
   }
-
   }

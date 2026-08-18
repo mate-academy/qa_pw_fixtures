@@ -22,6 +22,8 @@ export async function createNewArticle(page, article) {
 
   await viewArticlePage.assertArticleTitleIsVisible(article.title);
   await viewArticlePage.assertArticleTextIsVisible(article.text);
+  if (article.tags?.length) {
   await viewArticlePage.assertArticleTagIsVisible(article.tags);
+  }
 });
 }
