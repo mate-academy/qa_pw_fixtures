@@ -9,30 +9,28 @@ test.beforeEach(async ({ page, user }) => {
 
 test.describe('Add tags', () => {
 test('Add the tag for the existing article without tags', 
-  async ({ page, article, editArticlePage, viewArticlePage}) => {
-  const articleData = article(0);
-  await createNewArticle(page, articleData);
+  async ({ page, articleWithoutTags, editArticlePage, viewArticlePage}) => {
+  await createNewArticle(page, articleWithoutTags);
   
   await viewArticlePage.clickEditArticleButton();
-  await editArticlePage.fillTagsField([articleData.newTag]);
+  await editArticlePage.fillTagsField([articleWithoutTags.newTag]);
   await editArticlePage.clickUpdateButton();
   await page.waitForTimeout(5000);
   await page.reload();
   await page.waitForTimeout(5000);
-  await viewArticlePage.assertArticleTagIsVisible([articleData.newTag]);
+  await viewArticlePage.assertArticleTagIsVisible([articleWithoutTags.newTag]);
   
   
 });
 
 test('Add the tag for the existing article with tags', 
-  async ({ page, article, editArticlePage, viewArticlePage}) => {
-  const articleData = article(3);
-  await createNewArticle(page, articleData);
+  async ({ page, articleWithOneTag, editArticlePage, viewArticlePage}) => {
+  await createNewArticle(page, articleWithOneTag);
 
   await viewArticlePage.clickEditArticleButton();
-  await editArticlePage.fillTagsField([articleData.newTag]);
+  await editArticlePage.fillTagsField([articleWithOneTag.newTag]);
   await editArticlePage.clickUpdateButton();
-  const expectedTags = ([...articleData.tags, articleData.newTag]);
+  const expectedTags = ([...articleWithOneTag.tags, articleWithOneTag.newTag]);
   await page.waitForTimeout(5000);
   await page.reload();
   await page.waitForTimeout(5000);

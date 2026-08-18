@@ -5,42 +5,40 @@ import { createNewArticle } from '../../src/ui/actions/article/createNewArticle'
 
 
 test.describe('Edit Article', () => {
-  let articleData;
-test.beforeEach(async ({ page, user, article }) => {
-  articleData = article();
+test.beforeEach(async ({ page, user, articleWithoutTags }) => {
   await signUpUser(page, user);
-  await createNewArticle(page, articleData);
+  await createNewArticle(page, articleWithoutTags);
 });
 
 test('Edit the article title for the existing article', 
-  async ({ page, viewArticlePage, editArticlePage }) => {
+  async ({ page, viewArticlePage, editArticlePage, articleWithoutTags }) => {
     await viewArticlePage.clickEditArticleButton();
-    await editArticlePage.fillTitleField(articleData.newTitle);
+    await editArticlePage.fillTitleField(articleWithoutTags.newTitle);
     await editArticlePage.clickUpdateButton();
     await page.waitForTimeout(5000);
     await page.reload();
-    await viewArticlePage.assertArticleTitleIsVisible(articleData.newTitle);
+    await viewArticlePage.assertArticleTitleIsVisible(articleWithoutTags.newTitle);
 });
 
 test('Edit the article description for the existing article', 
-  async ({ page, viewArticlePage, editArticlePage, headerPage, viewProfilePage }) => {
+  async ({ page, viewArticlePage, editArticlePage, headerPage, viewProfilePage, articleWithoutTags }) => {
     await viewArticlePage.clickEditArticleButton();
-    await editArticlePage.fillDescriptionField(articleData.newDescription);
+    await editArticlePage.fillDescriptionField(articleWithoutTags.newDescription);
     await editArticlePage.clickUpdateButton();
     await headerPage.clickProfileLink(); 
     await page.reload();
     await page.waitForTimeout(5000);
-    await viewProfilePage.assertArticleDescription(articleData.newDescription);
+    await viewProfilePage.assertArticleDescription(articleWithoutTags.newDescription);
 });
 
 test('Edit the article text for the existing article', 
-  async ({ page, viewArticlePage, editArticlePage }) => {
+  async ({ page, viewArticlePage, editArticlePage, articleWithoutTags }) => {
     await viewArticlePage.clickEditArticleButton();
-    await editArticlePage.fillTextField(articleData.newText);
+    await editArticlePage.fillTextField(articleWithoutTags.newText);
     await editArticlePage.clickUpdateButton();
     await page.waitForTimeout(5000);
     await page.reload();
     await page.waitForTimeout(5000);
-    await viewArticlePage.assertArticleTextIsVisible(articleData.newText);
+    await viewArticlePage.assertArticleTextIsVisible(articleWithoutTags.newText);
 });
 });

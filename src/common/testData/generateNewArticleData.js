@@ -1,7 +1,6 @@
 import { faker } from '@faker-js/faker';
 
 export function generateNewArticleData(logger, tagNumber = 0) {
-  logger.info(`Generating article with ${tagNumber} tags`);
 
     const tags = Array.from(
     { length: tagNumber },
@@ -18,6 +17,8 @@ export function generateNewArticleData(logger, tagNumber = 0) {
     tags,
     newTag: `tag-${faker.string.alphanumeric(8)}`,
   };
+
+  logger.debug(`New article generated: ${article}`);
 
   return article;
 }

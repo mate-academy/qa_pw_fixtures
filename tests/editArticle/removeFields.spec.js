@@ -10,22 +10,20 @@ import {
 
 
 test.describe('Remove fields', () => {
-  let articleData;
-test.beforeEach(async ({ page, user, article }) => {
-  articleData = article(3);
+test.beforeEach(async ({ page, user, articleWithOneTag }) => {
 
   await signUpUser(page, user);
-  await createNewArticle(page, articleData);
+  await createNewArticle(page, articleWithOneTag);
 });
 
 test('Remove an article tag for the existing article with tag', 
-  async ({ page, viewArticlePage, editArticlePage }) => {
+  async ({ page, viewArticlePage, editArticlePage, articleWithOneTag }) => {
  await viewArticlePage.clickEditArticleButton();
- await editArticlePage.clickRemoveTagButton(1);
+ await editArticlePage.clickRemoveTagButton(0);
  await editArticlePage.clickUpdateButton();
  await page.reload();
  await page.waitForTimeout(5000);
- await viewArticlePage.assertTagIsRemoved(articleData.tags[1]);
+ await viewArticlePage.assertTagIsRemoved(articleWithOneTag.tags[0]);
 });
 
 test('Remove an article title for the existing article', 

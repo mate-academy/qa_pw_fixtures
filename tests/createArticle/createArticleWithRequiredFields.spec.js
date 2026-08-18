@@ -9,30 +9,28 @@ test.describe('Create an article with required fields', () => {
 });
 
 test('Create an article without tags', 
-  async ({ article, homePage, createArticlePage, viewArticlePage }) => {
-  const articleData = article(0);
+  async ({ articleWithoutTags, homePage, createArticlePage, viewArticlePage }) => {
 
   await homePage.clickNewArticleLink();
-  await createArticlePage.fillTitleField(articleData.title);
-  await createArticlePage.fillDescriptionField(articleData.description);
-  await createArticlePage.fillTextField(articleData.text);
+  await createArticlePage.fillTitleField(articleWithoutTags.title);
+  await createArticlePage.fillDescriptionField(articleWithoutTags.description);
+  await createArticlePage.fillTextField(articleWithoutTags.text);
   await createArticlePage.clickPublishArticleButton();
-  await viewArticlePage.assertArticleTitleIsVisible(articleData.title);
-  await viewArticlePage.assertArticleTextIsVisible(articleData.text);
+  await viewArticlePage.assertArticleTitleIsVisible(articleWithoutTags.title);
+  await viewArticlePage.assertArticleTextIsVisible(articleWithoutTags.text);
 });
 
 test('Create an article with tags', 
-  async ({ article, homePage, createArticlePage, viewArticlePage }) => {
-  const articleData = article(3);
+  async ({ articleWithTwoTags, homePage, createArticlePage, viewArticlePage }) => {
   await homePage.clickNewArticleLink();
-  await createArticlePage.fillTitleField(articleData.title);
-  await createArticlePage.fillDescriptionField(articleData.description);
-  await createArticlePage.fillTextField(articleData.text);
-  await createArticlePage.fillTagsField(articleData.tags);
+  await createArticlePage.fillTitleField(articleWithTwoTags.title);
+  await createArticlePage.fillDescriptionField(articleWithTwoTags.description);
+  await createArticlePage.fillTextField(articleWithTwoTags.text);
+  await createArticlePage.fillTagsField(articleWithTwoTags.tags);
   await createArticlePage.clickPublishArticleButton();
-  await viewArticlePage.assertArticleTitleIsVisible(articleData.title);
-  await viewArticlePage.assertArticleTextIsVisible(articleData.text);
-  await viewArticlePage.assertArticleTagIsVisible(articleData.tags);
+  await viewArticlePage.assertArticleTitleIsVisible(articleWithTwoTags.title);
+  await viewArticlePage.assertArticleTextIsVisible(articleWithTwoTags.text);
+  await viewArticlePage.assertArticleTagIsVisible(articleWithTwoTags.tags);
 });
 
 });

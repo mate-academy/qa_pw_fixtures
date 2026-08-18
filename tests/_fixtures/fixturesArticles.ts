@@ -5,6 +5,8 @@ import { ViewArticlePage } from '../../src/ui/pages/article/ViewArticlePage';
 import { EditArticlePage } from '../../src/ui/pages/article/EditArticlePage';
 import { HeaderPage } from '../../src/ui/pages/article/HeaderPage';
 import { ViewProfilePage } from '../../src/ui/pages/article/ViewProfilePage';
+import { generateNewArticleData } from '../../src/common/testData/generateNewArticleData';
+
 
 export const test = base.extend<{
   createArticlePage;
@@ -13,6 +15,9 @@ export const test = base.extend<{
   editArticlePage;
   headerPage;
   homePage;
+  articleWithoutTags;
+  articleWithOneTag;
+  articleWithTwoTags;
 }>({
   createArticlePage: async ({ page }, use) => {
     const createArticlePage = new CreateArticlePage(page);
@@ -44,4 +49,19 @@ export const test = base.extend<{
 
     await use(homePage);
   },
+  articleWithoutTags: async ({ logger }, use) => {
+    const articleWithoutTags = generateNewArticleData(logger, 0);
+
+    await use(articleWithoutTags);
+  },
+  articleWithOneTag: async ({ logger }, use) => {
+    const articleWithOneTag = generateNewArticleData(logger, 1);
+
+    await use(articleWithOneTag);
+  },
+  articleWithTwoTags: async ({ logger }, use) => {
+    const articleWithTwoTags = generateNewArticleData(logger, 2);
+
+    await use(articleWithTwoTags);
+  }
 });
