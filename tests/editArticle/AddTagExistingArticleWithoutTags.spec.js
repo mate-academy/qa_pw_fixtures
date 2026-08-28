@@ -3,12 +3,10 @@ import { generateNewUserData } from '../../src/common/testData/generateNewUserDa
 import { generateNewArticleData } from '../../src/common/testData/generateNewArticleData';
 import { signUpUser } from '../../src/ui/actions/auth/signUpUser';
 import { createNewArticle } from '../../src/ui/actions/auth/article/createNewArticle';
-import { Logger } from '../../src/common/logger/Logger';
 
 let article;
 
-test.beforeEach(async ({ page, homePage, viewArticlePage }) => {
-  const logger = new Logger();
+test.beforeEach(async ({ page, homePage, viewArticlePage, logger }) => {
   article = generateNewArticleData(logger);
   // article.tags = ['playwright', 'testing'];
 

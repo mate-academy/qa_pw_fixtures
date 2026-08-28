@@ -1,47 +1,62 @@
+
 import { test as base } from '@playwright/test';
+
 import { CreateArticlePage } from '../../src/ui/pages/article/CreateArticlePage';
 import { ViewArticlePage } from '../../src/ui/pages/article/ViewArticlePage';
 import { EditArticlePage } from '../../src/ui/pages/article/EditArticlePage';
-import { CreateArticleWithoutTagsPage } from '../../src/ui/pages/article/Tags/CreateArticleWithoutTagsPage';
-import { CreateArticleWithOneTagPage } from '../../src/ui/pages/article/Tags/CreateArticleWithOneTagPage';
-import { CreateArticleWithTwoTagPage } from '../../src/ui/pages/article/Tags/CreateArticleWithTwoTagPage';
+
+import { generateNewArticleData } from '../../src/common/testData/generateNewArticleData';
+import { Logger } from '../../src/common/logger/Logger';
 
 export const test = base.extend<{
   createArticlePage: CreateArticlePage;
   viewArticlePage: ViewArticlePage;
   editArticlePage: EditArticlePage;
-  articleWithoutTags: CreateArticleWithoutTagsPage;
-  articleWithOneTag: CreateArticleWithOneTagPage;
-  articleWithTwoTags: CreateArticleWithTwoTagPage;
+
+  articleWithoutTags: ReturnType<typeof generateNewArticleData>;
+  articleWithOneTag: ReturnType<typeof generateNewArticleData>;
+  articleWithTwoTags: ReturnType<typeof generateNewArticleData>;
 }>({
   createArticlePage: async ({ page }, use) => {
     const createArticlePage = new CreateArticlePage(page);
 
     await use(createArticlePage);
   },
+
   viewArticlePage: async ({ page }, use) => {
     const viewArticlePage = new ViewArticlePage(page);
 
     await use(viewArticlePage);
   },
+
   editArticlePage: async ({ page }, use) => {
     const editArticlePage = new EditArticlePage(page);
 
     await use(editArticlePage);
   },
-  articleWithoutTags: async ({ page }, uses) => {
-    const articleWithoutTags = new CreateArticleWithoutTagsPage(page);
 
-    await uses(articleWithoutTags);
+  articleWithoutTags: async ({}, use) => {
+    const logger = new Logger();
+
+    const articleWithoutTags = generateNewArticleData(logger, 0);
+
+    await use(articleWithoutTags);
   },
-  articleWithOneTag: async ({ page }, use) => {
-    const articleWithOneTag = new CreateArticleWithOneTagPage(page);
+
+  articleWithOneTag: async ({}, use) => {
+    const logger = new Logger();
+
+    const articleWithOneTag = generateNewArticleData(logger, 1);
 
     await use(articleWithOneTag);
   },
-  articleWithTwoTags: async ({ page }, use) => {
-    const articleWithTwoTags = new CreateArticleWithTwoTagPage(page);
+
+  articleWithTwoTags: async ({}, use) => {
+    const logger = new Logger();
+
+    const articleWithTwoTags = generateNewArticleData(logger, 2);
 
     await use(articleWithTwoTags);
   },
 });
+```
