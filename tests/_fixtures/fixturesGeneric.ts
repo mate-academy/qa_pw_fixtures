@@ -4,15 +4,15 @@ import { generateNewUserData } from '../../src/common/testData/generateNewUserDa
 
 export const test = base.extend<
   {
-    user;
-    infoTestLog;
+    user: ReturnType<typeof generateNewUserData>;
+    infoTestLog: string;
   },
   {
-    logger;
+    logger: Logger;
   }
 >({
-  user: async ({ logger }, use) => {
-    const user = generateNewUserData(logger);
+  user: async ({}, use) => {
+    const user = generateNewUserData();
 
     await use(user);
   },
@@ -26,14 +26,13 @@ export const test = base.extend<
   ],
   infoTestLog: [
     async ({ logger }, use, testInfo) => {
-      const indexOfTestSubfolderStart = testInfo.file.indexOf('/tests') + 7;
-      const fileName = testInfo.file.substring(indexOfTestSubfolderStart);
+      const fileName = testInfo.file.split(/[\\/]tests[\\/]/).pop();
 
-      logger.info(`Test started: ${fileName}`);
+      logger.debug(`Test started: ${fileName}`);
 
       await use('infoTestLog');
 
-      logger.info(`Test completed: ${fileName}`);
+      logger.debug(`Test completed: ${fileName}`);
     },
     { scope: 'test', auto: true },
   ],
