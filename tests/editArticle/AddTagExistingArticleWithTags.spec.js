@@ -1,33 +1,32 @@
 import { test } from '../_fixtures/fixtures';
+
 import { generateNewUserData } from '../../src/common/testData/generateNewUserData';
-import { generateNewArticleData } from '../../src/common/testData/generateNewArticleData';
+
 import { signUpUser } from '../../src/ui/actions/auth/signUpUser';
+
 import { createNewArticle } from '../../src/ui/actions/auth/article/createNewArticle';
 
-let article;
+test.beforeEach(
+  async ({ page, viewArticlePage, homePage, logger, articleWithTwoTags }) => {
+    const user = generateNewUserData(logger);
 
-test.beforeEach(async ({ page, viewArticlePage, homePage, logger }) => {
-  article = generateNewArticleData(logger);
+    await signUpUser(page, user);
 
-  article.tags = ['playwright', 'testing'];
+    await homePage.clickNewArticleLink();
 
-  const user = generateNewUserData(logger);
+    await createNewArticle(page, articleWithTwoTags);
 
-  await signUpUser(page, user);
+    await viewArticlePage.assertArticleTitleIsVisible(articleWithTwoTags.title);
 
-  await homePage.clickNewArticleLink(logger);
-
-  await createNewArticle(page, article);
-
-  await viewArticlePage.assertArticleTitleIsVisible(article.title);
-  await viewArticlePage.assertArticleTextIsVisible(article.text);
-});
+    await viewArticlePage.assertArticleTextIsVisible(articleWithTwoTags.text);
+  },
+);
 
 test('Add the tag for the existing article with tags', async ({
-  page,
   createArticlePage,
   viewArticlePage,
 }) => {
   await createArticlePage.addTagExistingArticleWithoutTags();
+
   await viewArticlePage.assertArticleTagIsVisible();
 });

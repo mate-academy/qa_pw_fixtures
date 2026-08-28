@@ -1,4 +1,3 @@
-
 import { test as base } from '@playwright/test';
 
 import { CreateArticlePage } from '../../src/ui/pages/article/CreateArticlePage';
@@ -18,45 +17,32 @@ export const test = base.extend<{
   articleWithTwoTags: ReturnType<typeof generateNewArticleData>;
 }>({
   createArticlePage: async ({ page }, use) => {
-    const createArticlePage = new CreateArticlePage(page);
-
-    await use(createArticlePage);
+    await use(new CreateArticlePage(page));
   },
 
   viewArticlePage: async ({ page }, use) => {
-    const viewArticlePage = new ViewArticlePage(page);
-
-    await use(viewArticlePage);
+    await use(new ViewArticlePage(page));
   },
 
   editArticlePage: async ({ page }, use) => {
-    const editArticlePage = new EditArticlePage(page);
-
-    await use(editArticlePage);
+    await use(new EditArticlePage(page));
   },
 
-  articleWithoutTags: async ({}, use) => {
+  articleWithoutTags: async (_, use) => {
     const logger = new Logger();
 
-    const articleWithoutTags = generateNewArticleData(logger, 0);
-
-    await use(articleWithoutTags);
+    await use(generateNewArticleData(logger, 0));
   },
 
-  articleWithOneTag: async ({}, use) => {
+  articleWithOneTag: async (_, use) => {
     const logger = new Logger();
 
-    const articleWithOneTag = generateNewArticleData(logger, 1);
-
-    await use(articleWithOneTag);
+    await use(generateNewArticleData(logger, 1));
   },
 
-  articleWithTwoTags: async ({}, use) => {
+  articleWithTwoTags: async (_, use) => {
     const logger = new Logger();
 
-    const articleWithTwoTags = generateNewArticleData(logger, 2);
-
-    await use(articleWithTwoTags);
+    await use(generateNewArticleData(logger, 2));
   },
 });
-```

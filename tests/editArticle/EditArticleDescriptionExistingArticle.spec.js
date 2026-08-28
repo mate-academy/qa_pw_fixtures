@@ -1,30 +1,34 @@
 import { test } from '../_fixtures/fixtures';
+
 import { generateNewUserData } from '../../src/common/testData/generateNewUserData';
-import { generateNewArticleData } from '../../src/common/testData/generateNewArticleData';
+
 import { signUpUser } from '../../src/ui/actions/auth/signUpUser';
+
 import { createNewArticle } from '../../src/ui/actions/auth/article/createNewArticle';
 
-let article;
+test.beforeEach(
+  async ({ page, viewArticlePage, homePage, logger, articleWithoutTags }) => {
+    const user = generateNewUserData(logger);
 
-test.beforeEach(async ({ page, viewArticlePage, homePage, logger }) => {
-  const user = generateNewUserData(logger);
+    await signUpUser(page, user);
 
-  article = generateNewArticleData(logger);
+    await homePage.clickNewArticleLink();
 
-  await signUpUser(page, user);
-  await homePage.clickNewArticleLink(logger);
+    await createNewArticle(page, articleWithoutTags);
 
-  await createNewArticle(page, article);
+    await viewArticlePage.assertArticleTitleIsVisible(articleWithoutTags.title);
 
-  await viewArticlePage.assertArticleTitleIsVisible(article.title);
-  await viewArticlePage.assertArticleTextIsVisible(article.text);
-});
+    await viewArticlePage.assertArticleTextIsVisible(articleWithoutTags.text);
+  },
+);
+
 test('Editing the description title', async ({
-  page,
-  createArticlePage,
+  editArticlePage,
   viewArticlePage,
 }) => {
-  await createArticlePage.clickEditArticle();
-  await createArticlePage.editingDescriptionArticle();
+  await editArticlePage.clickEditArticle();
+
+  await editArticlePage.editingDescriptionArticle();
+
   await viewArticlePage.assertArticleDescriptionIsEdit('New Description');
 });

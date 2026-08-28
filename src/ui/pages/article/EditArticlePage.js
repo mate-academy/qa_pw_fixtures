@@ -46,7 +46,7 @@ export class EditArticlePage {
       await this.titleField.fill('New Article Title');
 
       await expect(this.updateArticleButton).toBeEnabled();
-
+      await this.page.waitForTimeout(2000);
       await this.updateArticleButton.click();
     });
   }
