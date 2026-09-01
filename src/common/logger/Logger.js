@@ -1,5 +1,5 @@
 export class Logger {
-  constructor(level = 'info') {
+  constructor(level = 'debug') {
     this.levels = ['debug', 'info', 'warn', 'error'];
     this.currentLevel = level;
   }
