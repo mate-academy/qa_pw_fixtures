@@ -29,6 +29,8 @@ export const test = base.extend<{
   },
   editArticlePage: async({page}, use) => {
     const editArticlePage = new EditArticlePage(page);
+
+    await use(editArticlePage);
   },
   articleWithoutTags: async ({logger}, use) => {
     const articleWithoutTags = await generateNewArticleData(logger);
