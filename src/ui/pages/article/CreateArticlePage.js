@@ -56,7 +56,7 @@ export class CreateArticlePage {
 
   async getTagNames() {
     return await test.step(`Get added tag name`, async () => {
-      return await this.articleTag.nth(1).allTextContents()
+      return await this.articleTag.allTextContents()
     })
   }
 
