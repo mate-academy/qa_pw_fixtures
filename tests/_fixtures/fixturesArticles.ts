@@ -1,0 +1,66 @@
+import { test as base} from '@playwright/test';
+import { createNewArticle } from '../../src/ui/actions/article/createNewArticle';
+import { generateNewArticleData } from '../../src/common/testData/generateNewArticleData';
+import { CreateArticlePage } from '../../src/ui/pages/article/CreateArticlePage';
+import { ViewArticlePage } from '../../src/ui/pages/article/ViewArticlePage';
+import { EditArticlePage } from '../../src/ui/pages/article/EditArticlePage';
+import { ProfilePage } from '../../src/ui/pages/ProfilePage';
+
+export const test = base.extend<{
+  createArticlePage,
+  viewArticlePage,
+  editArticlePage,
+  articleWithoutTags,
+  articleWithOneTag,
+  articleWithTwoTags,
+  profilePage,
+  article,
+  createArticle,
+}>({
+  createArticlePage: async({page}, use) => {
+    const createArticlePage = new CreateArticlePage(page);
+
+    await use(createArticlePage);
+  },
+  viewArticlePage: async({page}, use) => {
+    const viewArticlePage = new ViewArticlePage(page);
+
+    await use(viewArticlePage);
+  },
+  editArticlePage: async({page}, use) => {
+    const editArticlePage = new EditArticlePage(page);
+
+    await use(editArticlePage);
+  },
+  articleWithoutTags: async ({logger}, use) => {
+    const articleWithoutTags = await generateNewArticleData(logger);
+
+    await use(articleWithoutTags);
+  },
+  articleWithOneTag: async ({logger}, use) => {
+    const articleWithOneTag = await generateNewArticleData(logger, 1);
+
+    await use(articleWithOneTag);
+  },
+  articleWithTwoTags: async ({logger}, use) => {
+    const articleWithTwoTags = await generateNewArticleData(logger, 2);
+
+    await use(articleWithTwoTags);
+  },
+  profilePage: async({page}, use) => {
+    const profilePage = new ProfilePage(page);
+
+    await use(profilePage);
+  },
+
+  article: async ({logger}, use) => {
+    const article = await generateNewArticleData(logger);
+
+    await use(article);
+  },
+  createArticle: async ({page, article}, use) => {
+    const createArticle = await createNewArticle(page, article);
+
+    await use(createArticle);
+  },
+})
