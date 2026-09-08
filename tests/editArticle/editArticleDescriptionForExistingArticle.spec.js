@@ -11,16 +11,15 @@ test.beforeEach(async ({ page, user, articleWithoutTags }) => {
 });
 
 test('Edit the Description of an existing article', async ({
-  page,
   createArticlePage,
   editArticlePage,
   articleWithoutTags,
+  viewArticlePage,
 }) => {
-  const newDescription = faker.lorem.words(3);
-  const viewArticlePage = new ViewArticlePage(page);    
+  const newDescription = faker.lorem.words(3); 
  
   await viewArticlePage.clickEditArticleButton();
   await createArticlePage.fillDescriptionField(newDescription); 
   await editArticlePage.clickUpdateArticleButton();
   await viewArticlePage.assertArticleTitleIsVisible(articleWithoutTags.title);
-});
+}); 

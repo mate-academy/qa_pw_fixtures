@@ -36,13 +36,13 @@ export const test = base.extend<ArticleFixtures>({
 
     await use(editArticlePage);
   },
-  articleWithoutTags: async ({}, use) => {
-    await use(generateNewArticleData());
+  articleWithoutTags: async ({ logger }, use) => {
+    await use(generateNewArticleData(logger, 0));
   },
-  articleWithOneTag: async ({}, use) => {
-    await use(generateNewArticleData(undefined, 1));
+  articleWithOneTag: async ({ logger }, use) => {
+    await use(generateNewArticleData(logger, 1));
   },
-  articleWithTwoTags: async ({}, use) => {
-    await use(generateNewArticleData(undefined, 2));
+  articleWithTwoTags: async ({ logger }, use) => {
+    await use(generateNewArticleData(logger, 2));
   },
 });
