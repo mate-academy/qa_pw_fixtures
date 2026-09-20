@@ -4,8 +4,9 @@ export class ViewArticlePage {
   constructor(page) {
     this.page = page;
     this.articleTitleHeader = page.getByRole('heading', { level: 1 });
-    this.articleEditButton = page.getByRole(
-      'link', { name: 'Edit Article' }).first();
+    this.articleEditButton = page
+      .getByRole('link', { name: 'Edit Article' })
+      .first();
     this.profile = page.getByRole('link', { name: 'your profile image' });
   }
 
@@ -14,7 +15,6 @@ export class ViewArticlePage {
       await this.articleEditButton.click();
     });
   }
-
 
   async assertArticleHasCorrectTitle(title) {
     await test.step(`Assert the article has correct title'`, async () => {
@@ -38,7 +38,6 @@ export class ViewArticlePage {
     });
   }
 
-
   async assertArticleTextIsVisible(text) {
     await test.step(`Assert the article has correct text`, async () => {
       await this.page.waitForURL(/\/article\//);
@@ -61,8 +60,9 @@ export class ViewArticlePage {
     await test.step(`Assert the '${tag}' tag is not visible`, async () => {
       await this.page.waitForURL(/\/article\//);
       await this.page.reload();
-      await expect(this.page.locator('.tag-pill').filter({ hasText: tag }))
-        .toHaveCount(0);
+      await expect(
+        this.page.locator('.tag-pill').filter({ hasText: tag }),
+      ).toHaveCount(0);
     });
   }
 }

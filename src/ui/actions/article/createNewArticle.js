@@ -1,8 +1,7 @@
-import test from "@playwright/test";
-import { HomePage } from "../../pages/HomePage";
-import { CreateArticlePage } from "../../pages/article/CreateArticlePage"
-import { ViewArticlePage } from "../../pages/article/ViewArticlePage"
-
+import test from '@playwright/test';
+import { HomePage } from '../../pages/HomePage';
+import { CreateArticlePage } from '../../pages/article/CreateArticlePage';
+import { ViewArticlePage } from '../../pages/article/ViewArticlePage';
 
 export async function createNewArticle(page, article) {
   await test.step(`Create new article`, async () => {
@@ -13,5 +12,5 @@ export async function createNewArticle(page, article) {
     await homePage.clickNewArticleLink();
     await createArticlePage.submitArticleForm(article);
     await viewArticlePage.assertArticleHasCorrectTitle(article.title);
-  })
+  });
 }
