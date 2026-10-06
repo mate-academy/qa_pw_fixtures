@@ -3,12 +3,23 @@ import { expect, test } from '@playwright/test';
 export class CreateArticlePage {
   constructor(page) {
     this.page = page;
+
     this.titleField = page.getByPlaceholder('Article Title');
-    this.descriptionField = page.getByPlaceholder(`What's this article about?`);
-    this.textField = page.getByPlaceholder('Write your article (in markdown)');
+
+    this.descriptionField = page.getByPlaceholder(
+      "What's this article about?",
+    );
+
+    this.textField = page.getByPlaceholder(
+      'Write your article (in markdown)',
+    );
+
+    this.tagField = page.getByPlaceholder('Enter tags');
+
     this.publishArticleButton = page.getByRole('button', {
       name: 'Publish Article',
     });
+
     this.errorMessage = page.getByRole('list').nth(1);
   }
 
@@ -27,6 +38,13 @@ export class CreateArticlePage {
   async fillTextField(text) {
     await test.step(`Fill the 'Text' field`, async () => {
       await this.textField.fill(text);
+    });
+  }
+
+  async fillTagField(tag) {
+    await test.step(`Fill the 'Tag' field`, async () => {
+      await this.tagField.fill(tag);
+      await this.tagField.press('Enter');
     });
   }
 
