@@ -4,8 +4,8 @@ let user;
 
 test.beforeEach(async ({}) => {
   user = {
-    email: 'test_new_user@gmail.com',
-    password: 'newpass123!',
+    email: 'ivan_test20254@gmail.com',
+    password: 'qwerty23456!',
   };
 });
 
