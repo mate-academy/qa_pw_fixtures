@@ -11,16 +11,16 @@ test.beforeEach(async ({ page, user, articleWithOneTag }) => {
 // eslint-disable-next-line max-len
 test('Remove the existing tag and add a new tag for the existing article with tags', async ({
   viewArticlePage,
-  createArticlePage,
+  editArticlePage,
   articleWithOneTag,
 }) => {
   const tag = faker.lorem.word();
 
   await viewArticlePage.clickEditArticleButton();
 
-  await createArticlePage.clickDeleteTagIcon();
-  await createArticlePage.fillTagsField(tag);
-  await createArticlePage.clickUpdateArticleButton();
+  await editArticlePage.clickDeleteTagIcon();
+  await editArticlePage.fillTagsField(tag);
+  await editArticlePage.clickUpdateArticleButton();
 
   await viewArticlePage.waitFor();
   await viewArticlePage.reload();

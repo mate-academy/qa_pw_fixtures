@@ -10,7 +10,7 @@ test.beforeEach(async ({ page, user, articleWithoutTags }) => {
 
 test('Edit the article description for the existing article', async ({
   viewArticlePage,
-  createArticlePage,
+  editArticlePage,
   userProfilePage,
   articleWithoutTags,
 }) => {
@@ -18,8 +18,8 @@ test('Edit the article description for the existing article', async ({
 
   await viewArticlePage.clickEditArticleButton();
 
-  await createArticlePage.fillDescriptionField(updatedDescription);
-  await createArticlePage.clickUpdateArticleButton();
+  await editArticlePage.fillDescriptionField(updatedDescription);
+  await editArticlePage.clickUpdateArticleButton();
 
   await viewArticlePage.waitFor();
   await viewArticlePage.reload();

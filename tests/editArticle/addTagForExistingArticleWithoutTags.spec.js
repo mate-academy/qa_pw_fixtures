@@ -10,15 +10,15 @@ test.beforeEach(async ({ page, user, articleWithoutTags }) => {
 
 test('Add the tag for the existing article without tags', async ({
   articleWithoutTags,
-  createArticlePage,
+  editArticlePage,
   viewArticlePage,
 }) => {
   const tag = faker.lorem.words();
 
   await viewArticlePage.clickEditArticleButton();
 
-  await createArticlePage.fillTagsField(tag);
-  await createArticlePage.clickUpdateArticleButton();
+  await editArticlePage.fillTagsField(tag);
+  await editArticlePage.clickUpdateArticleButton();
 
   await viewArticlePage.waitFor();
   await viewArticlePage.reload();

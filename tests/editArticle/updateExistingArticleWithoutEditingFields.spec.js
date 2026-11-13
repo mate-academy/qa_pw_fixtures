@@ -10,12 +10,12 @@ test.beforeEach(async ({ page, user, articleWithOneTag }) => {
 // eslint-disable-next-line max-len
 test('Click the [Update] button without editing fields of the existing article with tags', async ({
   viewArticlePage,
-  createArticlePage,
+  editArticlePage,
   articleWithOneTag,
 }) => {
   await viewArticlePage.clickEditArticleButton();
 
-  await createArticlePage.clickUpdateArticleButton();
+  await editArticlePage.clickUpdateArticleButton();
 
   await viewArticlePage.waitFor();
   await viewArticlePage.reload();

@@ -10,15 +10,15 @@ test.beforeEach(async ({ page, user, articleWithoutTags }) => {
 
 test('Edit the article text for the existing article', async ({
   viewArticlePage,
-  createArticlePage,
+  editArticlePage,
   articleWithoutTags,
 }) => {
   const updatedText = faker.lorem.sentences();
 
   await viewArticlePage.clickEditArticleButton();
 
-  await createArticlePage.fillTextField(updatedText);
-  await createArticlePage.clickUpdateArticleButton();
+  await editArticlePage.fillTextField(updatedText);
+  await editArticlePage.clickUpdateArticleButton();
 
   await viewArticlePage.waitFor();
   await viewArticlePage.reload();

@@ -10,15 +10,15 @@ test.beforeEach(async ({ page, user, articleWithoutTags }) => {
 
 test('Edit the article title for the existing article', async ({
   viewArticlePage,
-  createArticlePage,
+  editArticlePage,
   articleWithoutTags,
 }) => {
   const updatedTitle = faker.lorem.word();
 
   await viewArticlePage.clickEditArticleButton();
 
-  await createArticlePage.fillTitleField(updatedTitle);
-  await createArticlePage.clickUpdateArticleButton();
+  await editArticlePage.fillTitleField(updatedTitle);
+  await editArticlePage.clickUpdateArticleButton();
 
   await viewArticlePage.waitFor();
   await viewArticlePage.reload();

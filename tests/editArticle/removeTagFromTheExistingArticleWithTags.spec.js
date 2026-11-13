@@ -7,15 +7,15 @@ test.beforeEach(async ({ page, user, articleWithOneTag }) => {
   await createNewArticle(page, articleWithOneTag);
 });
 
-test('Add the tag for the existing article with tags', async ({
+test('Remove tag from the existing article with tags', async ({
   viewArticlePage,
-  createArticlePage,
+  editArticlePage,
   articleWithOneTag,
 }) => {
   await viewArticlePage.clickEditArticleButton();
 
-  await createArticlePage.clickDeleteTagIcon();
-  await createArticlePage.clickUpdateArticleButton();
+  await editArticlePage.clickDeleteTagIcon();
+  await editArticlePage.clickUpdateArticleButton();
 
   await viewArticlePage.assertArticleTagIsHidden(articleWithOneTag.tags);
 });
