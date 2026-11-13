@@ -33,9 +33,9 @@ export class ViewArticlePage {
     });
   }
 
-  async assertArticleTagListIsVisible(tags) {
+  async assertArticleTagListIsVisible(tag) {
     await test.step(`Assert the article has correct tags'`, async () => {
-      await expect(this.page.getByText(tags)).toBeVisible();
+      await expect(this.page.getByText(tag)).toBeVisible();
     });
   }
 

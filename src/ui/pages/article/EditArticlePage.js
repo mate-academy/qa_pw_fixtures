@@ -39,12 +39,6 @@ export class EditArticlePage {
     this.errorMessage = page.getByRole('list').nth(1);
   }
 
-  async open() {
-    await test.step(`Open 'Create Article' page`, async () => {
-      await this.page.goto('/editor');
-    });
-  }
-
   async fillTitleField(title) {
     await test.step(`Fill the 'Title' field`, async () => {
       await this.titleField.fill(title);
