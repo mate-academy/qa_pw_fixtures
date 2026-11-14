@@ -10,5 +10,31 @@ export function generateNewArticleData(logger, tagNumber = 0) {
     tags,
   };
 
+  logger.debug(`Generated new article: ${JSON.stringify(article)}`);
+
   return article;
+}
+
+export function generateNewTitle () {
+  let newTitle = faker.lorem.word();
+
+  return newTitle;
+}
+
+export function generateNewDescription () {
+  let newDescription = faker.lorem.sentence();
+
+  return newDescription;
+}
+
+export function generateNewText () {
+  let newText = faker.lorem.paragraph();
+
+  return newText;
+}
+
+export function generateTag () {
+  let tag = faker.lorem.word();
+
+  return tag;
 }
